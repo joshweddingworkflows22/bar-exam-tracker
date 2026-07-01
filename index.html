@@ -6,106 +6,106 @@
 <title>2026 Bar Exam Study Tracker</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/tabler-icons.min.css">
 <style>
+:root{
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-voice:var(--font-sans);
+  --radius:8px;
+  --surface-0:#f7f6f0;--surface-1:#fff;--surface-2:#fff;
+  --border:#e5e3da;--border-strong:#d8d5c9;--border-accent:#2a78d6;
+  --bg-accent:#e6f1fb;
+  --text-primary:#1c1b17;--text-secondary:#55524a;--text-muted:#928e80;
+  --text-accent:#1a5aa8;--text-success:#1a8f5e;--text-danger:#c23d3c;--text-warning:#a8620f;
+  --fill-accent:#2a78d6;--fill-success:#1baf7a;--fill-danger:#e34948;
+  --on-accent:#fff;--on-success:#fff;
+}
+@media(prefers-color-scheme:dark){
   :root{
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-voice: var(--font-sans);
-    --radius: 8px;
+    --surface-0:#1a1a17;--surface-1:#232320;--surface-2:#232320;
+    --border:#33322d;--border-strong:#403f38;--border-accent:#378add;
+    --bg-accent:#0c2a44;
+    --text-primary:#f1f0e9;--text-secondary:#c7c4b8;--text-muted:#83806f;
+    --text-accent:#6cb0ef;--text-success:#4fd39a;--text-danger:#f0837f;--text-warning:#f0aa5c;
+    --fill-accent:#378add;--fill-success:#1baf7a;--fill-danger:#e34948;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--surface-0);font-family:var(--font-sans)}
+#app-wrap{max-width:720px;margin:0 auto;min-height:100vh;background:var(--surface-0)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.card{background:var(--surface-2);border:.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.metric{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px}
+.pill-btn{padding:4px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:500;border:.5px solid var(--border-strong);background:transparent;color:var(--text-secondary)}
+.pill-btn.active{border-color:var(--border-accent);background:var(--bg-accent);color:var(--text-accent)}
+.nav-btn{padding:6px 14px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:500;transition:background .15s;font-family:var(--font-sans)}
+.sess-row{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px;border:.5px solid var(--border);margin-bottom:10px}
+.field-label{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:6px;margin-top:2px}
+input,select,textarea,datalist{font-family:var(--font-sans);font-size:14px;color:var(--text-primary);background:var(--surface-1);border:.5px solid var(--border-strong);border-radius:var(--radius);padding:9px 11px;width:100%;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--border-accent);box-shadow:0 0 0 2px var(--bg-accent)}
+textarea{resize:vertical}
+.save-btn{width:100%;margin-top:6px;padding:12px;background:var(--fill-accent);color:var(--on-accent);border:none;border-radius:var(--radius);font-weight:500;font-size:14px;cursor:pointer;font-family:var(--font-sans)}
+.save-btn.ok{background:var(--fill-success)}
+.icon-btn{padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:500;border:.5px solid var(--border);background:transparent;color:var(--text-secondary);font-family:var(--font-sans);display:inline-flex;align-items:center;gap:4px}
+.icon-btn:hover{background:var(--surface-0)}
+.icon-btn.danger{color:var(--text-danger);border-color:var(--text-danger)}
+.icon-btn.primary{color:var(--text-accent);border-color:var(--border-accent)}
 
-    --surface-0: #f7f6f0;
-    --surface-1: #ffffff;
-    --surface-2: #ffffff;
-    --border: #e5e3da;
-    --border-strong: #d8d5c9;
-    --border-accent: #2a78d6;
-    --bg-accent: #e6f1fb;
-    --text-primary: #1c1b17;
-    --text-secondary: #55524a;
-    --text-muted: #928e80;
-    --text-accent: #1a5aa8;
-    --text-success: #1a8f5e;
-    --text-danger: #c23d3c;
-    --text-warning: #a8620f;
-    --fill-accent: #2a78d6;
-    --fill-success: #1baf7a;
-    --on-accent: #ffffff;
-    --on-success: #ffffff;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --surface-0: #1a1a17;
-      --surface-1: #232320;
-      --surface-2: #232320;
-      --border: #33322d;
-      --border-strong: #403f38;
-      --border-accent: #378add;
-      --bg-accent: #0c2a44;
-      --text-primary: #f1f0e9;
-      --text-secondary: #c7c4b8;
-      --text-muted: #83806f;
-      --text-accent: #6cb0ef;
-      --text-success: #4fd39a;
-      --text-danger: #f0837f;
-      --text-warning: #f0aa5c;
-      --fill-accent: #378add;
-      --fill-success: #1baf7a;
-      --on-accent: #ffffff;
-      --on-success: #ffffff;
-    }
-  }
-  html, body{
-    margin:0;
-    padding:0;
-    background:var(--surface-0);
-    font-family:var(--font-sans);
-  }
-  #app-wrap{
-    max-width:720px;
-    margin:0 auto;
-    min-height:100vh;
-    background:var(--surface-0);
-  }
+/* Toast */
+#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1c1b17;color:#fff;padding:10px 18px;border-radius:24px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:12px;z-index:999;transition:opacity .3s;pointer-events:auto;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+#toast.hidden{opacity:0;pointer-events:none}
+#toast-undo{background:rgba(255,255,255,.15);border:none;color:#fff;padding:4px 10px;border-radius:12px;cursor:pointer;font-size:12px;font-weight:600;font-family:var(--font-sans)}
+#toast-undo.hidden{display:none}
+
+/* Floating timer */
+#timer-float{position:fixed;bottom:20px;right:16px;z-index:998;background:var(--surface-2);border:.5px solid var(--border);border-radius:16px;padding:10px 14px;box-shadow:0 4px 20px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px;font-family:var(--font-sans)}
+#timer-display{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text-primary);min-width:72px}
+#timer-display.running{color:var(--text-accent)}
+.timer-btn{padding:5px 12px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:600;border:none;font-family:var(--font-sans)}
+.timer-btn.start{background:var(--fill-accent);color:#fff}
+.timer-btn.stop{background:#e34948;color:#fff}
+.timer-btn.use{background:var(--fill-success);color:#fff}
+.timer-btn.reset{background:transparent;border:.5px solid var(--border);color:var(--text-muted)}
+
+/* Timeline bars */
+.tl-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;min-width:0}
+.tl-bar-col{display:flex;flex-direction:column-reverse;height:80px;width:100%;border-radius:3px;overflow:hidden;background:var(--surface-0)}
+.tl-bar-seg{width:100%;flex-shrink:0;transition:height .3s}
+.tl-date-label{font-size:9px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
+
+/* Syllabus view */
+.syl-section{margin-bottom:6px}
+.syl-section-hdr{padding:8px 12px;background:var(--surface-1);border-radius:var(--radius);cursor:pointer;font-size:12px;font-weight:600;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center;border:.5px solid var(--border)}
+.syl-topics{padding:4px 0 4px 12px;border-left:2px solid var(--border-accent);margin-left:12px;margin-top:4px}
+.syl-topic{padding:5px 8px;font-size:12px;color:var(--text-secondary);border-radius:4px;cursor:pointer;line-height:1.4}
+.syl-topic:hover{background:var(--bg-accent);color:var(--text-accent)}
+.syl-topic.checked{color:var(--text-success);text-decoration:line-through;opacity:.6}
 </style>
 </head>
 <body>
 <div id="app-wrap">
-
-<style>
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
-.nav-btn{padding:6px 14px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:500;transition:background .15s}
-.sess-row{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px;border:0.5px solid var(--border);margin-bottom:10px}
-.field-label{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:6px}
-.card{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px}
-.metric{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px}
-.pill-btn{padding:4px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:500;border:0.5px solid var(--border-strong);background:transparent;color:var(--text-secondary)}
-.pill-btn.active{border-color:var(--border-accent);background:var(--bg-accent);color:var(--text-accent)}
-input,select,textarea{font-family:var(--font-sans);font-size:14px;color:var(--text-primary);background:var(--surface-1);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:9px 11px;width:100%;box-sizing:border-box;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--border-accent);box-shadow:0 0 0 2px var(--bg-accent)}
-textarea{resize:vertical}
-.save-btn{width:100%;margin-top:6px;padding:12px;background:var(--fill-accent);color:var(--on-accent);border:none;border-radius:var(--radius);font-weight:500;font-size:14px;cursor:pointer;font-family:var(--font-sans)}
-.save-btn.ok{background:var(--fill-success);color:var(--on-success)}
-</style>
-
-<h2 class="sr-only">2026 Philippine Bar exam study tracker — log sessions, track streaks, and monitor progress by subject</h2>
-
-<div id="root" style="font-family:var(--font-sans);color:var(--text-primary);padding-bottom:28px"></div>
-
+  <h2 class="sr-only">2026 Philippine Bar Exam Study Tracker</h2>
+  <div id="toast" class="hidden">
+    <span id="toast-msg"></span>
+    <button id="toast-undo" class="hidden" onclick="undoAction()">Undo</button>
+  </div>
+  <div id="timer-float">
+    <div id="timer-display">00:00</div>
+    <button id="timer-toggle-btn" class="timer-btn start" onclick="toggleTimer()">Start</button>
+    <button id="timer-use-btn" class="timer-btn use" onclick="useTimerTime()" style="display:none">Use time</button>
+    <button id="timer-reset-btn" class="timer-btn reset" onclick="resetTimer()" style="display:none">✕</button>
+  </div>
+  <div id="root"></div>
+</div>
 <script>
+const SYLLABUS={"POLITICAL AND PUBLIC INTERNATIONAL LAW (15%)":[{"section":"BASIC CONCEPTS","topics":["Nature, Concept, and Interpretation of a Constitution","Amendment and Revision","Declaration of Principles and State Policies","Sovereignty","State Immunity","Separation of Powers","Checks and Balances","Delegation of Powers","Fundamental Powers of the State","Police Power","Eminent Domain (in relation to Republic Act [R.A.] No. 10752)","Taxation"]},{"section":"NATIONAL TERRITORY","topics":["Scope (Terrestrial, Fluvial, and Aerial Domains)","Archipelagic Doctrine","Maritime Zones"]},{"section":"CITIZENSHIP","topics":["Who are Filipino Citizens","Modes of Acquiring Citizenship","Natural-born and Naturalized Citizens","Loss and Re-acquisition of Philippine Citizenship","R.A. No. 9225","Dual Citizenship and Dual Allegiance"]},{"section":"LEGISLATIVE DEPARTMENT","topics":["Legislative Power","Scope and Limitations","Principle of Non-delegability; Exceptions","Initiative and Referendum","Legislative Inquiries and Oversight Functions","Power of Impeachment","Limitations on Legislative Power","Limitations on Revenue, Appropriations, and Tariff","Presidential Veto and Congressional Override","Appropriation and Realignment","Chambers of Congress; Composition; Qualifications","Senate","House of Representatives","Apportionment of Legislative Districts","Party-list System","Declaration of the Existence of a State of War","Legislative Privileges, Inhibitions, and Disqualifications","Quorum and Voting Majorities","Discipline of Members","Lawmaking Process","Commission on Appointments"]},{"section":"EXECUTIVE DEPARTMENT","topics":["Qualifications, Election, and Term of the President and Vice-President","Privileges, Inhibitions, and Disqualifications","Presidential Immunity","Executive Privilege","Powers of the President","General Executive and Administrative Powers","Power of Appointment","Process of Confirmation by the Commission on Appointments","Bypassed Appointments and their Effects","Appointments by an Acting President","Scope of Midnight Appointments","AdInterimAppointments","Disciplinary Power (Suspension and Removal)","Power of Control and Supervision","Doctrine of Qualified Political Agency","Executive Departments and Offices","Local Government Units (LGUs)","Emergency Powers","Commander-in-Chief Powers","Calling Out Power","Pardoning Power","Scope and Limitations","Forms of Executive Clemency","Diplomatic Powers","In General","Contracting or Guaranteeing Foreign Loans","Entry into Treaties or International Agreements; Withdrawal and Termination","Powers Relative to Appropriation Measures","Delegated Powers","Residual Powers","Veto Powers","Rules of Succession"]},{"section":"JUDICIAL DEPARTMENT","topics":["Concept of Judicial Power","Judicial Review","Requisites","Political Question Doctrine","Moot Questions","Operative Fact Doctrine","Judicial Independence and Fiscal Autonomy","Appointments to the Judiciary","Qualifications of Members","Judicial and Bar Council","Composition","Powers","The Supreme Court","Composition, Powers, and Functions","Power to Promulgate Rules","Original and Appellate Jurisdiction","EnBancand Division Cases","Administrative Supervision over Lower Courts"]},{"section":"CONSTITUTIONAL COMMISSIONS","topics":["Constitutional Safeguards to Ensure Independence","Common Provisions","Powers, Functions, and Jurisdiction","Composition and Qualifications of Members","Prohibited Offices and Interests"]},{"section":"CONSTITUTIONAL RIGHTS","topics":["Due Process","Procedural and Substantive","Void-for-Vagueness","Judicial and Administrative Due Process","Equal Protection","Requisites for Valid Classification","Standards of Judicial Review","Rational Basis Test","Strict Scrutiny Test","Intermediate Scrutiny Test","Arrests, Searches, and Seizures","Requisites of a Valid Warrant","Warrantless Arrests and Searches","Exclusionary Rule","Privacy of Communications and Correspondence","Zones of Privacy","Exclusionary Rule","Data Privacy \u2013 R.A. No. 10173","Personal v. Sensitive Personal Information","Scope","Processing of Personal and Sensitive Personal Information;","General Data Privacy Principles","Rights of the Data Subject","Freedom of Speech and Expression","Prior Restraint and Subsequent Punishment","Content-based and Content-neutral Regulations","Facial Challenges and Overbreadth Doctrine","Protected v. Unprotected Speech","State Regulation of Different Types of Mass Media","Freedom of Religion","Non-establishment and Free Exercise Clauses","Liberty of Abode and Right to Travel","Watchlist and Hold Departure Orders","Right to Information","Executive Order No. 2, s. 2016 on Freedom of Information","R.A. No. 11032 (Ease of Doing Business Act)","Right to Association","Non-impairment of Contracts","Free Access to Courts and Adequate Legal Assistance","Custodial Investigation","Requisites of a Valid Waiver and the Exclusionary Rule","Rights of the Accused","Right to Speedy Trial and Speedy Disposition of Cases","Right Against Self-incrimination","Right Against Double Jeopardy","Right Against Involuntary Servitude","Right Against Excessive Fines, and Cruel and Inhuman Punishments","Non-imprisonment for Debts","ExPostFacto Laws and Bills of Attainder","Writs of HabeasCorpus, Kalikasan, HabeasData, and Amparo","Social Justice and Human Rights","Economic, Social, and Cultural Rights","Academic Freedom"]},{"section":"NATIONAL ECONOMY AND PATRIMONY","topics":["Public Trust Doctrine \u2013 R.A. No. 11659 (New Public Service Act)","Nationality and Citizenship Requirement Provisions","Exploration, Development, and Utilization of Natural Resources","Acquisition, Ownership, and Transfer of Public and Private Lands","Ancestral Domain \u2013 R.A. No. 8371, Chapters I-III"]},{"section":"ADMINISTRATIVE LAW","topics":["General Principles","Administrative Agencies","Powers of Administrative Agencies","Quasi-legislative or Rule-making Power","Kinds of Administrative Rules and Regulations","Requisites for Validity","Quasi-judicial or Adjudicatory Power","Administrative Due Process","Administrative Appeal and Review","Administrative ResJudicata","Fact-finding, Investigative, Licensing, and Rate-fixing Powers","Judicial Recourse and Review","Primary Jurisdiction","Exhaustion of Administrative Remedies","Finality of Administrative Action"]},{"section":"LAW ON PUBLIC OFFICERS","topics":["General Principles","Modes of Acquiring Title to Public Office","Modes and Kinds of Appointment","Eligibility and Qualification Requirements","Disabilities and Inhibitions of Public Officers","Powers and Duties of Public Officers","Rights of Public Officers","Immunity of Public Officers","DeFactoand DeJureOfficers","Termination of Official Relation","The Civil Service","Scope","Appointments to the Civil Service","Personnel Actions","Accountability of Public Officers","Types of Accountability","Discipline","Grounds","Jurisdiction","Condonation Doctrine","Impeachment and QuoWarranto","Functions","Judicial Review in Administrative Proceedings","Judicial Review in Penal Proceedings","Sandiganbayan"]},{"section":"ELECTION LAW","topics":["Suffrage","Qualifications and Disqualification of Voters","Registration and Deactivation of Voters","Inclusion and Exclusion Proceedings","Local and Overseas Absentee Voting","Detainee Voting","Candidacy","Qualifications and Disqualifications of Candidates","Filing of Certificates of Candidacy","Effect of Filing","Duties of the Commission on Elections (COMELEC)","Ministerial Duty of COMELEC to Receive Certificates of Candidacy","Eligibility and Material Misrepresentation","Withdrawal of Certificates of Candidacy","Substitution of Candidates","Nuisance Candidates and Effects of Declaration of Nuisance Candidacy","Disqualification of Candidates; Effects","Campaign","Premature Campaigning","Prohibited Contributions","Lawful and Prohibited Election Propaganda","Limitations on Expenses","Statement of Contributions and Expenses","Remedies and Jurisdiction","Petition to Deny Due Course or Cancel a Certificate of Candidacy","Petition for Disqualification","Failure of Election; Call for Special Election","Pre-proclamation Controversy","Election Protest","QuoWarranto","Recall","Electoral Tribunals","Prosecution of Election Offenses (Exclude: Penal Provisions)"]},{"section":"LOCAL GOVERNMENTS","topics":["Principles of Local Autonomy","Requisites for Creation, Conversion, Division, Merger, or Dissolution","Autonomous Regions and their Relation to the National Government","Local Government Units","Powers","Police Power","Eminent Domain","Taxation","Closure and Opening of Roads","Local Legislation","Corporate Powers","UltraViresActs","Liability","Settlement of Boundary Disputes","Vacancies and Succession of Local Officials","Recall","Term Limits","Local Elective and Appointive Officials"]},{"section":"PUBLIC INTERNATIONAL LAW","topics":["Sources of International Law","Statute of the International Court of Justice","Effect of United Nations Declarations and Security Council Resolutions","Sources of International Legal Obligation","Treaties","Customary International Law","Principles of Law","Subjects of International Law","Relationship Between International and Domestic Law","Jurisdiction of States","Basis","Territoriality Principle","Nationality Principle and Statelessness","Protective Principle","Universality Principle","Passive Personality Principle","Exemptions","Act of State Doctrine","International Organizations and their Officers","Diplomatic and Consular Law","General Principles of Treaty Law","Doctrine of State Responsibility","Treatment of Aliens","Extradition","Fundamental Principles","Procedure","Distinguished from Deportation","International Human Rights Law","Universal Declaration of Human Rights","International Covenant on Civil and Political Rights","International Covenant on Economic, Social, and Cultural Rights","International Humanitarian Law","Categories of Armed Conflicts","International Armed Conflicts","Internal or Non-international Armed Conflict","War of National Liberation","Dispute Resolution","War Crimes, Genocide, and Other Crimes Against Humanity","The Role of the International Criminal Court","Dispute Resolution","International Court of Justice","Permanent Court of Arbitration","Peaceful Settlement of International Disputes","Use of Force Short of War","War and Neutrality","Treatment of Civilians","Prisoners of War","Law of the Sea","International Tribunal for the Law of the Sea","Freedom of Navigation","Maritime and Territorial Disputes","International Environmental Law","Principle 21 of the Stockholm Declaration","Precautionary Principle"]}],"COMMERCIAL AND TAXATION LAWS (20%)":[{"section":"BUSINESS ORGANIZATIONS","topics":["Corporations \u2013 R.A. No. 11232","Definition of Corporation","Classes of Corporations","Nationality of Corporations","Control Test","Grandfather Rule","Juridical Personality","Doctrine of Piercing the Corporate Veil","Capital Structure","Number and Qualifications of Incorporators","Subscription Requirements","Corporate Term","Classification of Shares","Incorporation and Organization","Promoters","Liability","Liability of Corporation for Promoters\u2019 Contracts","Subscription Contract","Pre-incorporation Subscription Agreements","Consideration for Stocks","Articles of Incorporation","Classification of Shares","Corporate Name and Limitations on its Use","DeFactoCorporation","Corporation by Estoppel","Election of Directors or Trustees","Corporate Powers","Stockholders and Members","Doctrine of Equality of Shares","Fundamental Rights of a Stockholder","Participation in Management; Voting Requirements","Stockholder\u2019s Rights","Stockholder Suits","Meetings","Directors and Trustees","Repository of Corporate Powers","Tenure, Qualifications, and Disqualifications","Independent Directors","Election, Removal, and Filling of Vacancies","Compensation","Disloyalty","Business Judgment Rule","Liabilities and Responsibilities","Special Fact Doctrine; Inside Information","Directors Self-dealing with the Corporation","Dealings between Corporations with Interlocking Directors","Capital Affairs","Certificate of Stock","Watered Stocks","Definition","Liability of Directors","Trust Fund Doctrine","Payment of Balance of Subscription","Sale of Delinquent Shares","Transfer of Shares","Corporate Books and Records","Securities \u2013 R.A. No. 8799","Regulatory Framework \u2013 Secs. 8-10","Definition of Security; Howey Test \u2013 Sec. 3","Registration of Securities","Exempt Securities","Exempt Transactions","Merger, Consolidation, and Acquisition \u2013 relate to R.A. No. 10667","Concept \u2013 Sec. 4","Asset-only and Business Enterprise Transfers","Review \u2013 Sec. 16","Compulsory Notification \u2013 Secs. 17-19","Prohibited Mergers and Acquisitions \u2013 Secs. 20-22","Effects","Corporate Dissolution and Liquidation","Foreign Corporations","Suability and Personality to Sue","Doing Business in the Philippines","Definition of Foreign Investment","Registration Requirement","Nationalized Activities and the Negative List","Special Corporations","Close Corporations","Non-stock Corporations","Educational Corporations","Religious Corporations","One Person Corporations","Excepted Corporations","Capital Stock Requirement","Articles of Incorporation and By-laws","Corporate Name","Corporate Structure and Officers","Nominee","Liability","Conversion of Corporation","Partnerships","General Provisions","Definition and Separate Juridical Personality","Rules to Determine Existence","Separate Juridical Personality","Partnership by Estoppel","Kinds of Partnership","Obligations of Partners among Themselves","Property Rights of Partners","Obligations of Partnership; Obligations of Partners to Third Persons","Dissolution and Winding Up"]},{"section":"INSURANCE","topics":["Concept of Insurance","Insurable Interest","Concealment","Representation","Policy","Warranties","Premium","Loss","Notice and Proof of Loss","Double Insurance and Overinsurance","Reinsurance","Rescission of Insurance Contracts"]},{"section":"TRANSPORTATION","topics":["Common Carriers","Common Carrier v. Private Carrier","Diligence Required","Transport Network Services","Defenses Available to a Common Carrier","Vigilance over Goods","Under the Civil Code","Under the Montreal Convention","Under the Carriage of Goods by Sea Act","Safety of Passengers","Under the Civil Code","Under the Montreal Convention","Under the Carriage of Goods by Sea Act"]},{"section":"BANKING","topics":["Secrecy of Bank Deposits \u2013 R.A. No. 1405 and R.A. No. 6426, as amended","Purpose","Prohibited Acts","Coverage and Exceptions","Garnishment of Deposits, including Foreign Deposits","General Banking Law \u2013 R.A. No. 8791","Definition and Classification of Banks","Distinction among Banks, Quasi-banks, and Trust Entities","Nature of Bank Funds and Bank Deposits","Diligence Required of Banks","Prohibited Transactions by Bank Directors, Officers, and Employees","Stipulation on Interest","Deposit Insurance \u2013 R.A. No. 3591, as amended by R.A. No. 11840","Definition of Insured Deposit","Deposit Insurance Coverage","Splitting of Deposits","Anti-Money Laundering \u2013 R.A. No. 9160, as amended by R.A. No. 9194,","Policy","Covered Institutions and their Obligations","Covered Transactions","Suspicious Transactions","Safe Harbor Provision","Money Laundering","How Committed","Predicate Crimes or Unlawful Activity","Authority to Inquire, Freezing, and Forfeiture","The Central Bank \u2013 R.A. No. 7653, as amended by R.A. No. 11211","State Policies","Powers and Functions of the Monetary Board","Banks in Distress","Conservatorship","Closure","Receivership","Liquidation"]},{"section":"INTELLECTUAL PROPERTY","topics":["Patents","Patentable v. Non-patentable Inventions","Ownership of a Patent","Rights Conferred","Limitations","Infringement","Cancellation","True and Actual Inventor\u2019s Remedy","Licensing","Assignment and Transmission of Rights","Trademarks","Marks v. Collective Marks v. Trade Names","Acquisition of Ownership","Non-registrable Marks","Ownership, Registration, and Duration","Confusing Similarity","Well-known Marks","Rights Conferred by Registration","Infringement","Unfair Competition","Cancellation","Copyright","Basic Principles \u2013 Secs. 172.2, 175, and 181","Copyrightable Works","Non-copyrightable Works","Rights Conferred by Copyright","Ownership of a Copyright","Limitations on Copyright","Fair Use","Copyright Infringement"]},{"section":"SPECIAL COMMERCIAL LAWS","topics":["R.A. No. 10142 (Financial Rehabilitation and Insolvency Act)","Definition of Insolvent","Rehabilitation","Key Concepts","Effects of Commencement Order and Exceptions","Cram Down Effect","Liquidation and Effects of Liquidation Order","Suspension of Payments","R.A. No. 8792 (Electronic Commerce Act)","Lawful Access and Obligation of Confidentiality \u2013 Sec. 32","Critical Infrastructure \u2013 R.A. No. 11659, Sec. 2(e)","Foreign State-owned Enterprise \u2013 R.A. No. 11659, Sec. 2(g)","Public Service as Public Utility \u2013 R.A. No. 11659, Sec. 4","Unlawful Acts \u2013 R.A. No. 11659, Sec. 9","Reciprocity Clause \u2013 R.A. No. 11659, Sec. 25","R.A. No. 10667 (Philippine Competition Act)","Definitions and Scope of Application \u2013 Sec. 4","Prohibited Acts","Anti-competitive Agreements \u2013 Sec. 14","PerSeViolations","Not PerSeViolations","Abuse of Dominant Position \u2013 Sec. 15","Determining the Relevant Market \u2013 Secs. 4(k) and 24","Determining Control or Dominance of Market \u2013 Secs. 25 and 27","Determining Existence of Anti-competitive Conduct \u2013 Sec. 26","General Principles","Concept and Definition of Taxation","Inherent and Constitutional Limitations of Taxation","Requisites of a Valid Tax","Construction and Interpretation of Tax Laws, Rules, and Regulations","Double Taxation","Escape from Taxation","Tax Exemption","Compromise and Tax Amnesty","Taxpayer\u2019s Suit: Rationale and Requisites","Jurisdiction, Powers, and Functions of the Bureau of Internal Revenue","Income Tax","Nature and General Principles","Criteria in Imposing Philippine Income Tax","Kinds of Taxpayers","Income","Definition","Realization and Recognition","Taxability","Sources","Compensation Income","Professional Income","Income from Business","Active v. Passive Income","Income from Dealings in Property","Capital v. Ordinary Asset","Situs of Income Taxation","Gross Income v. Net Income v. Taxable Income","Tax Deductions v. Tax Credits","Optional Standard Deduction","Withholding Taxes","Rationale","Creditable v. Withholding Taxes","Duties of a Withholding Agent","Value-Added Tax (VAT)","Concept","Elements of Transaction Subject to VAT","Impact and Incidence of Tax","Destination Principle; Cross-Border Doctrine","Transactions Deemed Sale Subject to VAT","Zero-rated Transactions","VAT Exempt Persons v. VAT Exempt Transactions","Input and Output Tax","Tax Refund or Tax Credit","Estate Tax (Basic Principles and Concepts only)","Donor\u2019s Tax (Basic Principles and Concepts only)","Tax Remedies under the NIRC","General Concepts","Tax Deficiency v. Tax Delinquency","Tax Evasion","Civil Penalties","Deficiency Interest and Delinquency Interest","Surcharge","Compromise Penalty","Assessment Process","Letter of Authority","Submission of Supporting Documents by Taxpayer","Notice of Discrepancy","Issuance of Preliminary Assessment Notice","Prescriptive Period for Assessment","False Return v. Fraudulent Return v. Non-filing","Suspension of the Running of Statute of Limitations","Collection Process","Requisites","Prescriptive Periods","Taxpayers\u2019 Remedies","Protesting an Assessment","Period to File Protest","Effect of Failure to File Protest","Submission of Supporting Documents by Taxpayer","Decision of the Commissioner on the Protest","Period to Act Upon or Decide","Remedies in Case of CIR\u2019s Denial or Failure to Act","Effect of Failure to Appeal","Compromise and Abatement of Taxes","Recovery of Tax Erroneously or Illegally Collected","Proper Party to File Claim for Refund or Tax Credit","Government Remedies","Administrative Remedies","Tax Lien","Distraint and Levy","Forfeiture of Real Property","Suspension of Business Operation","Judicial Remedies","Civil Action","Criminal Action","Local Taxation \u2013 R.A. No. 7160","General Principles \u2013 Secs. 130 and 132","Validity of Local Tax Ordinance \u2013 Sec. 187","Assessment and Collection of Local Taxes \u2013 Sec. 194","Remedies of Local Government Units","Prescriptive Period","Injunction","Taxpayers\u2019 Remedies","Protest \u2013 Sec. 195","Refund or Credit \u2013 Sec. 196","Court Action","Local Taxes","Professional Tax \u2013 Sec. 139","Local Business Tax \u2013 Secs. 143, 145, and 146","Community Tax \u2013 Secs. 157-160","Real Property Taxation (Book II, Title II)","Fundamental Principles; Nature; Power to Levy","Exemption from Real Property Tax \u2013 Sec. 234","Appraisal and Assessment","Collection","Taxpayers\u2019 Remedies","Against Assessment","Payment Under Protest; Exceptions","Compromise of Assessment","Against Valuation of Property","Appeal to the Local Board of Assessment Appeals","Appeal to the Central Board of Assessment Appeals","Effect of Payment of Taxes","Judicial Remedies","Court of Tax Appeals (CTA)","Exclusive Original and Appellate Jurisdiction Over Civil Cases","Procedures","Action for Collection of Taxes","National Taxes","Local Taxes","Civil Cases","Who May Appeal, Mode of Appeal, and Effect of Appeal","Suspension of Collection of Taxes","Injunction Not Available to Restrain Tax Collection","Criminal Cases","Institution and Prosecution of Criminal Action","Institution of Civil Action in Criminal Action","Appeal to the CTA EnBanc","Petition for Review on Certiorarito the Supreme Court"]}],"CIVIL LAW AND LAND TITLES AND DEEDS (20%)":[{"section":"EFFECT AND APPLICATION OF LAWS","topics":["When Laws Take Effect \u2013 NCC, Art. 2","Ignorance of the Law \u2013 NCC, Art. 3","Retroactivity of Laws \u2013 NCC, Art. 4","Mandatory and Prohibitory Laws \u2013 NCC, Art. 5","Waiver \u2013 NCC, Art. 6","Repeal and Nullification of Laws \u2013 NCC, Art. 7","Operative Fact Doctrine","Judicial Decisions \u2013 NCC, Art. 8","Territoriality of Penal Laws \u2013 NCC, Art. 14","Conflict of Laws \u2013 NCC, Arts. 15-18","LexNationalii","LexReiSitae","LexContractus","LexLociCelebrationis","LexDomicilii","LexFori","LexLociDelicti","LexLociSolutionis","Renvoi"]},{"section":"PERSONS","topics":["Juridical Capacity","Acquisition","Natural Persons","Juridical Persons \u2013 NCC, Art. 44","The State and its Political Subdivisions","Corporations \u2013 R.A. No. 11232, Secs. 2, 4, and 18","Cooperatives \u2013 R.A. No. 9520, Arts. 3, 4(4), 9, and 16","Capacity to Act","Presumption of Existence","Acquisition \u2013 R.A. No. 6809","Restrictions","Further Restrictions Arising from Minority \u2013 R.A. No. 11596"]},{"section":"FAMILY RELATIONS","topics":["Marriage \u2013 FC, Articles 1-148; 1987 Constitution, Art. II, Sec. 12 and Art. XV","General Principles","State Policy on Marriage","Essential and Formal Requisites of Marriage","Effects of Absence, Defect, or Irregularity of the Requisites","Rights and Obligations Between Husband and Wife","Validity of Marriages Celebrated Abroad","Mixed Marriages and Foreign Divorce","Void Marriages","Voidable Marriages","Legal Separation","Property Relations between the Spouses","Family Relations","General Concepts \u2013 FC, Arts. 149-151","Paternity and Filiation \u2013 FC, Arts. 163-182; R.A. No. 9255; R.A. No. 9858","Adoption and Care of Children","Domestic Adoption \u2013 R.A. No. 11642","Who may Adopt","Who may be Adopted","Process","Effects","Rescission","Inter-country Adoption \u2013 R.A. No. 8043","Foundlings \u2013 R.A. No. 11767","Citizenship","Registration","Adoption","Recovery by Biological Parents or Legal Guardian","Safe Haven","Support \u2013 FC, Arts. 194-208","Family Home \u2013 FC, Arts. 152-162","Parental Authority \u2013 FC, Arts. 209-233"]},{"section":"CIVIL REGISTER","topics":["Required Entries \u2013 NCC, Arts. 407-408","Correction of Entries","Rule 108, Rules of Court","R.A. No. 9048, as amended by R.A. No. 10172","R.A. No. 11909","Rectification of Simulated Births \u2013 R.A. No. 11222"]},{"section":"PROPERTY, OWNERSHIP, AND ITS MODIFICATIONS","topics":["Property","Requisites","Classification of Property","According to Nature","Immovable Property","Movable Property","According to Ownership","Property of Private Ownership","Property of Public Dominion","Water Resources","Ownership \u2013 NCC, Arts. 502-503; P.D. No. 1067,","Use of Public Waters \u2013 NCC, Arts. 504-506;","Patrimonial Property","Ownership","Definition","Object","Difference between Real and Personal Rights","Attributes","Consequences","Actions to Recover Ownership and Possession","AccionReivindicatoria","AccionPubliciana","AccionInterdictal","Quieting of Title","Accession","Co-ownership","Possession","Definition","Classification of Possession","Effects of Possession","Loss of Possession","Usufruct","Easements","Concept","Characteristics","Kinds","Modes of Acquisition","Rights and Obligations of the Dominant and Servient Estate","Extinguishment","Modes of Acquiring Ownership","Occupation","Tradition","Donation","Prescription"]},{"section":"LAND TITLES AND DEEDS","topics":["Torrens System","Decree of Registration","Review of Decree of Registration","Innocent Purchaser for Value; Rights","Regalian Doctrine","Nationality Restrictions on Land Ownership","Original Registration","Confirmation of Imperfect Title \u2013 R.A. No. 11573","Certificate of Title","Subsequent Registration","Voluntary Dealings","Involuntary Dealings","Adverse Claims and Notice of LisPendens","Non-registrable Properties","Dealings with Unregistered Lands","Assurance Fund","Nature","Conditions for Compensation","Respondents in Action to Claim","Reckoning Point of the Prescriptive Period to Claim","Reconstitution of Title \u2013 R.A. No. 26"]},{"section":"SUCCESSION","topics":["Definition \u2013 NCC, Arts. 774 and 712","Elements","Death \u2013 NCC, Arts. 775 and 777","Inheritance \u2013 NCC, Arts. 775 and 781","Successors \u2013 NCC, Art. 782","Acceptance \u2013 NCC, Arts. 1041-1057","Testamentary Succession \u2013 NCC, Arts. 783-959","Intestate Succession \u2013 NCC, Arts. 960-1014","Common Provisions \u2013 NCC, Arts. 1015-1105","Distribution of Estate"]},{"section":"OBLIGATIONS AND CONTRACTS","topics":["Obligations","General Provisions","Definition","Essential Elements","Sources of Obligation","Nature and Effects of Obligations","Classification","Civil and Natural","Pure","Conditional; Kinds of Conditions","With a Period","Alternative Obligations","Joint and Solidary Obligations","Divisible and Indivisible Obligations","Obligations with a Penal Clause","Extinguishment","Payment","Loss of the Thing Due","Condonation","Confusion","Compensation","Novation","Concept","Express and Implied Novation","Expromisionand DelegacionDistinguished","Consent Required","Effect of Insolvency of New Debtor","Legal and Conventional Subrogation","Estoppel","Contracts","General Provisions","Definition","Elements","Basic Principles","Obligatory Force","Freedom to Stipulate and its Limitations","Relativity","Consensuality","Mutuality","Real v. Consensual Contracts","Form, Reformation, and Interpretation of Contracts","Defective Contracts","Rescissible Contracts","Voidable Contracts","Unenforceable Contracts","Void Contracts"]},{"section":"SPECIAL CONTRACTS","topics":["Sale","Nature and Form","Contract of Sale v. Contract to Sell","Option Contract","Right of First Refusal","Earnest Money","Capacity to Buy or Sell","Obligations of the Vendor","Double Sale","Effects of Loss of Thing Sold","Installment Sales","Personal Property","Real Property \u2013 R.A. No. 6552","Transactions Covered","Computation of the Number of Installments Made","Rights Given to the Buyer on Installment","Requisites for Valid Cancellation","Conventional and Legal Redemption","Equitable Mortgage","Lease","Rights and Obligations of the Lessor and Lessee","Sublease and Assignment","Agency","Nature, Form, and Kinds","Obligations of Agent and Principal","Extinguishment","Credit Transactions","Loan","Definition","Mutuumand Commodatum","Deposit","Definition","Kinds","Guaranty and Suretyship","Nature and Extent","Effects","Extinguishment","Legal and Judicial Bonds","Real Estate Mortgage","Requisites","Characteristics","Judicial v. Extra-judicial Foreclosure","Right of Redemption","Personal Property Security \u2013 R.A. No. 11057","Definitions and Scope \u2013 Secs. 3 and 4","Creation of Security Interest","Perfection of Security Interest","Registration","Possession","Control"]},{"section":"QUASI-CONTRACTS","topics":["Definition","Kinds","NegotiorumGestio","SolutioIndebiti","Distinction from AccionInRemVerso","Mistake of Law as Basis for SolutioIndebiti","Significance of Good Faith on the Part of the Payee","Other Quasi-contracts"]},{"section":"TORTS AND QUASI-DELICTS","topics":["Principles","Abuse of Right; Elements","Unjust Enrichment","Liability without Fault","Acts Contrary to Law","Acts Contrary to Morals","Tortious Interference","AccionInRemVerso","The Tortfeasor","Direct Tortfeasor","Persons Made Responsible for Others","In General","Quasi-delicts","Indirect Liability for Intentional Acts","Nature of Liability","In Particular","Parents","Guardians","Owners and Managers of Establishments and Enterprises","Employers","The State","Teachers and Heads of Establishments of Arts and Trades","Joint Tortfeasors","Proximate Cause","Concept","Distinguished from Immediate Cause","Distinguished from Intervening Cause","Distinguished from Remote and Concurrent Causes","Legal Cause","Natural and Probable Consequences","Foreseeability","Efficient Intervening Cause","Cause v. Condition","Last Clear Chance","Classification of Torts","Intentional","Negligent","Strict Liability","Defenses","Due Diligence","Acts of Public Officers","Accident or Fortuitous Event","DamnumAbsqueInjuria","Assumption of Risk","Last Clear Chance","Prescription","Waiver","Double Recovery","Nuisance","Medical Negligence and Malpractice"]},{"section":"DAMAGES","topics":["General Considerations","Kinds","Actual and Compensatory","Moral","Nominal","Temperate or Moderate","Liquidated","Exemplary or Corrective","Damages in Case of Death","Duty of Injured Party"]}],"LABOR AND SOCIAL LEGISLATION (10%)":[{"section":"BASIC PRINCIPLES AND CONCEPTS","topics":["Legal Basis","International Documents","International Labor Organization Ratifications","1987 Constitution","Civil Code","Labor Code","State Labor Policies","Full Protection to Labor \u2013 1987 Constitution, Art. XIII, Sec. 3","Security of Tenure \u2013 1987 Constitution, Art. XIII, Sec. 3","Social Justice \u2013 1987 Constitution, Art. II, Sec. 10; LC, Art. 218","Equal Work Opportunities \u2013 1987 Constitution, Art. XIII, Sec. 3; LC, Art. 3","Construction of Labor and Social Legislation \u2013 LC, Art. 4; NCC, Art. 1702"]},{"section":"RECRUITMENT AND PLACEMENT","topics":["Definition of Recruitment and Placement","Local Employment \u2013 LC, Title I","Parties","Worker","Employment Office or Agency","Public Employment Offices \u2013 LC, Art. 16","Private Employment Entities \u2013 LC, Art. 25","Employment Agency v. Recruitment Entity","License/Authority Requirement","Non-transferability","Suspension or Cancellation","Overseas Employment \u2013 R.A. No. 8042, as amended","Regulatory Authorities","Department of Labor and Employment (DOLE)","Department of Migrant Workers (DMW)","Parties","Migrant Worker or Overseas Filipino Worker","Private Employers or Employment and Recruitment Agents","Employment Agency v. Recruitment Entity","Liability of Local Recruitment Entity and Foreign Employer","Solidary Liability","Imputed Knowledge","Entities and Persons Prohibited from Overseas Recruitment","License or Authority Requirement","Non-transferability","Suspension or Cancellation","Ban on Direct Hiring","Regulation of Recruitment and Placement Activities","Prohibited Practices \u2013 LC, Art. 34","Illegal Recruitment","Elements and Types"]},{"section":"EMPLOYMENT RELATIONSHIP","topics":["Employer\u2013Employee Relationship","Definition","D.O. No. 147, s. 2015, Sec. 3","Tests","Burden of Proof","Piercing the Corporate Veil","Cases Involving Television Broadcasters","Trilateral Relationship; Requirements for Independent Contractor","Permissible Contracting or Subcontracting; Not Covered","Rights of Contractor\u2019s or Subcontractor\u2019s Employees","Effect of Termination of Employment","Labor-only Contracting","Registration of Contractor","Other Prohibitions","Solidary Liability","Retaliatory Measures","Applicability/Non\u2013applicability","Kinds of Employment","Regular","Casual","Project \u2013 D.O. No. 19, s. 1993","Fixed Term","Seasonal","Probationary"]},{"section":"LABOR STANDARDS","topics":["Conditions of Employment","Hours of Work","Flexible Work Arrangements \u2013 R.A. No. 11165","Bunkhouse Rule","Personal Comfort Doctrine","Normal Hours of Work","Night Shift Differential","Overtime Work","Compressed Work Week","Built-in Overtime","Non-compensable Hours; When Compensable","Meal Break","Power Interruptions or Brownouts","Idle Time","Travel Time","Commuting Time","Waiting Time","Rest Periods","Service Charge \u2013 R.A. No. 11360; D.O. No. 242, s. 2024","Wages \u2013 LC and its Implementing Rules and Regulations (IRR); R.A. No. 6727,","Definition, Components, and Exclusions","Wage v. Salary","Bonus, 13th Month","Holiday Pay \u2013 LC and its IRR; E.O. No. 203; R.A. No. 9492;","Principles","No Work, No Pay or Fair Day\u2019s Wage for a Fair Day\u2019s Work","Equal Pay for Equal Work or Equal Pay for Work of Equal Value","Non-diminution of Benefits","Minimum Wage","Payment by Hours Worked","Payment by Results","Payment of Wages","Prohibitions Regarding Wages","Wage Order","Wage Distortion","Leaves","Under the Labor Code","Service Incentive Leave","Under Special Laws","Maternity Leave \u2013 R.A. No. 11210","Paternity Leave \u2013 R.A. No. 8187","Gynecological Leave \u2013 R.A. No. 9710, Sec. 18; D.O. No. 112, s. 2011;","VAWC Leave \u2013 R.A. No. 9262","Telecommuting \u2013 R.A. No. 11165","Definition \u2013 Sec. 3","Telecommuting Program \u2013 Sec. 4","Fair Treatment \u2013 Sec. 5","Working Conditions for Special Workers","Apprentices and Learners","Dual Training System \u2013 R.A. No. 7686; R.A. No. 10869","R.A. No. 11230","Persons with Disabilities","Working Conditions for Special Groups of Employees","Women Workers \u2013 R.A. No. 7192; R.A. No. 7877; R.A. No. 9710;","Discrimination","Stipulation Against Marriage","Prohibited Acts","Facilities for Women","Women Working in Night Clubs, etc.","Minors","R.A. No. 7610, as amended","DOLE Department Advisory No. 01, s. 2008","D.O. No. 149, s. 2016; D.O. No. 149-A, s. 2017","Night Workers \u2013 R.A. No. 10151","Kasambahay\u2013 R.A. No. 10361","Homeworkers","Management Prerogative","Occupational Qualifications","Productivity Standards","Change of Working Hours","Transfer of Employees","Discipline of Employees","Grant of Bonuses and Other Benefits","Clearance Process","Post-employment Restrictions","Limitations","Discriminatory Practices","Age Discrimination \u2013 R.A. No. 10911","Gender or Marital Status Discrimination \u2013 R.A. No. 9710;","Discrimination against Disabled Persons \u2013 R.A. No. 7277"]},{"section":"LABOR RELATIONS","topics":["Right to Self-organization","Coverage","Government Employees","Eligibility for Membership","Doctrine of Necessary Implication","Commingling or Mixed Membership","Labor Organizations","Labor Organization and Legitimate Labor Organization","Union, Workers\u2019 Association, and Legitimate Workers\u2019","National Union or Federation, Union Center","Company Union","Bargaining Unit","Determination of Constituency","Employees Outside the Bargaining Unit","Bargaining Representative","Sole and Exclusive Bargaining Agent","Certification and Consent Elections","Bystander Rule","Rights, Terms, and Conditions of Membership","Admission and Discipline of Members","Major Policy Matter","Union Funds","Payment of Attorney\u2019s Fees","Check-off, Assessment, and Agency Fees","Mandatory Activity","Union Information","Enforcement and Remedies; Procedure, Jurisdiction, and Sanctions","Collective Bargaining","Duty to Bargain","Procedure","Freedom Period","Collective Bargaining Agreement","Mandatory Provisions","Economic and Non-economic Terms/Conditions","Union Security Clause","Union Chartering or Registration","Unfair Labor Practice","Definition and Concept","By Employers","By Labor Organizations","Peaceful Concerted Activities \u2013 see also R.A. No. 6727","Strikes","Pickets","Lockouts","Assumption of Jurisdiction by DOLE Secretary"]},{"section":"SUSPENSION AND TERMINATION OF EMPLOYMENT","topics":["Termination or Suspension by Employer","General Concept","Just Causes","Authorized Causes \u2013 see also D.O. No. 147, s. 2015","Retrenchment","Redundancy","Closure","Disease","Union Security Clause","Illegal Strike","Procedure \u2013 see also D.O. No. 147, s. 2015","Quitclaim","Due Process Requirements","Preventive Suspension","Constructive Dismissal v. Demotion","Termination by employee","Resignation","Unilateral Termination \u2013 LC, Art. 300(b)","Abandonment","Illegal Dismissal","Definition","Reliefs","Reinstatement","Backwages","Damages and Attorney\u2019s Fees","Separation Pay","Financial Assistance","Indemnity","Liability of Corporate Officers"]},{"section":"SOCIAL LEGISLATION","topics":["Social Security \u2013 R.A. No. 11199","Coverage and Exclusions","Dependents; Beneficiaries","Benefits","Government Service Insurance \u2013 R.A. No. 8291","Coverage and Exclusions","Dependents; Beneficiaries","Benefits","Limited Portability Scheme \u2013 R.A. No. 7699","Disability and Death Benefits","In General \u2013 LC, Art. 198"]},{"section":"LABOR ADJUDICATION: JURISDICTION & REMEDIES","topics":["Labor Adjudication Agencies and their Jurisdiction","National Labor Relations Commission (NLRC)","Regional Arbitration Branches (RAB) (Labor Arbiters)","Jurisdiction in Local Employment Cases","Jurisdiction in Overseas Employment Cases \u2013 R.A. No. 8042","Commission Proper \u2013 see also R.A. No. 9347","DOLE","Regional Directors","Jurisdiction","Recovery and Adjudicatory Power","DOLE Secretary","Jurisdiction","Visitorial and Enforcement Powers \u2013 D.O. No. 283, s. 2023;","Power to Suspend Effects of Termination","Jurisdiction in Labor Relations Cases","Jurisdiction in Seafarers\u2019 Disability Cases","Tripartite Voluntary Arbitration Advisory Council","Bureau of Labor Relations","Court of Appeals","Supreme Court","Procedure and Remedies","Procedural Standards in Labor Proceedings \u2013 LC, Art. 227","Burden of Proof","Quantum of Evidence","Technical Rules not Binding","Single-Entry Approach \u2013 D.O. No. 151, s. 2016","Mandatory Conciliation-Mediation \u2013 R.A. No. 10396","Procedure in the NLRC","Appeal from the RAB to the NLRC Proper","Perfection","Reinstatement or Execution Pending Appeal","Injunction","Certiorariagainst DOLE Secretary and NLRC Proper Rulings"]}],"CRIMINAL LAW (10%)":[{"section":"FUNDAMENTAL PRINCIPLES","topics":["Construction or Interpretation of Penal Laws","Effects of Repeal or Amendment","Retroactive Effect of Penal Laws","ProReoPrinciple or Rule of Lenity","NullumCrimen, NullaPoenaSineLege","MalaInSeand MalaProhibita","Cardinal Principles of Criminal Law","Generality","Territoriality","Prospectivity","Constitutional Limitations on the Power to Enact Penal Laws","Equal Protection","Due Process","Bill of Attainder","ExPostFactoLaw","Excessive Fines, Cruel, Degrading, or Inhuman Punishment"]},{"section":"FELONIES AND CRIMINAL LIABILITY","topics":["Felonies","Definition","Doloand Culpa","Felony and Crime, Distinguished","Gravity","Stages of Execution","Subjective Phase and Objective Phase","Spontaneous Desistance","Attempted, Frustrated, and Consummated Stages","Preparatory and Overt Acts","Plurality of Crimes","Absorption Principle","Single Impulse Rule","Compound Complex Crime","Complex Crime Proper","Special Complex Crime or Composite Crimes","Continuous or Continuing Crime","Criminal Liability","ActusReusand MensRea","Criminal Causation","Proximate Cause","Efficient Intervening Cause","AberratioIctus, ErrorInPersonae, and PraeterIntentionem","Impossible Crime","Duty of Courts when Act is Non-punishable or Penalty is Excessive","Participation in Acts Giving Rise to Criminal Liability","Principals, Accomplices, and Accessories","Fencers \u2013 P.D. No. 1612","Obstructors of Criminal Prosecution \u2013 P.D. No. 1829","Conspiracy and Proposal","As a Mode of Incurring Criminal Liability","As a Criminal Act","Circumstances Affecting Criminal Liability","Justifying Circumstances \u2013 RPC, Art. 11","Exempting Circumstances \u2013 RPC, Art. 12","Minority \u2013 R.A. No. 9344, Sec. 6, as amended","Battered Woman Syndrome \u2013 R.A. No. 9262","Mitigating Circumstances \u2013 RPC, Art. 13","Aggravating Circumstances \u2013 RPC, Art. 14","Using Loose Firearm \u2013 R.A. No. 10591, Sec. 29","Being under the Influence of Dangerous Drugs \u2013 R.A. No. 9165,","Using Information and Communications Technologies \u2013","Alternative Circumstances \u2013 RPC, Art. 15","Absolutory Causes","Instigation and Entrapment","Effect of Repeat Commission of Crimes","Recidivism \u2013 RPC, Art. 14(9)","Quasi-recidivism \u2013 RPC, Art. 160","Habituality \u2013 RPC, Art. 14(10)","Habitual Delinquency \u2013 RPC, Art. 62(5)","Criminal Liability of Minors \u2013 R.A. No. 9344, as amended","Penalties","Classification","Principal and Accessory Penalties","Duration and Effects","Application and Graduation","Determination of Imposable Penalty","Preventive Imprisonment","Subsidiary Penalty","Execution and Service","Community Service \u2013 R.A. No. 11362; A.M. No. 20-06-14-SC","Recognizance \u2013 R.A. No. 10389","Successive Service of Sentence","Three-Fold Rule","Indeterminate Sentence Law \u2013 Act No. 4103, as amended","Probation \u2013 P.D. No. 968, as amended","Extinction of Criminal Liability","Total Extinction","Death of Convict","Service of Sentence","Amnesty","Absolute Pardon","Prescription","Prescription of Crimes","Act No. 3326","Prescription of Penalties","Marriage between the Offender and the Offended Party","Partial Extinction","Conditional Pardon \u2013 Act No. 1524","Commutation of Sentence","Good Conduct Time Allowance \u2013 R.A. No. 10592","Parole","Civil Liability ExDelicto","Primary and Subsidiary","Restitution, Reparation, and Indemnification","Civil Liability of an Offender Exempted from Criminal Liability","Share of Each Person Civilly Liable for a Felony","Preference in Payment","Extinction and Survival of Civil Liability ExDelicto"]},{"section":"CRIMES AND THEIR PENALTIES","topics":["Title One \u2013 Crimes against National Security and the Law of Nations","Piracy \u2013 P.D. No. 532","Terrorism \u2013 R.A. No. 11479","Terrorism Financing \u2013 R.A. No. 10168","Genocide and War Crimes \u2013 R.A. No. 9851, Secs. 4 and 5","Title Two \u2013 Crimes against the Fundamental Laws of the State","Torture \u2013 R.A. No. 9745","Other Crimes against Humanity \u2013 R.A. No. 9851, Sec. 6","Title Three \u2013 Crimes against Public Order","Obstruction of Justice \u2013 P.D. No. 1829","Highway Robbery \u2013 P.D. No. 532","Title Four \u2013 Crimes against Public Interest","Computer-related Forgery \u2013 R.A. No. 10175, Sec. 4(b)(1)","Computer-related Fraud \u2013 R.A. No. 10175, Sec. 4(b)(2)","Computer-related Identity Theft \u2013 R.A. No. 10175, Sec. 4(b)(3)","Cyber-squatting \u2013 R.A. No. 10175, Sec. 4(a)(6)","Title Six \u2013 Crimes against Public Morals","Gambling \u2013 P.D. No. 1602, as amended by R.A. No. 9287","Immoral Doctrines \u2013 RPC, Arts. 133 and 201","Title Seven \u2013 Crimes Committed by Public Officers","Plunder \u2013 R.A. No. 7080, as amended","Definitions","Series and Combination","Pattern","Wheel and Chain Conspiracy","Graft and Corrupt Practices \u2013 R.A. No. 3019, as amended","Unethical Conduct \u2013 R.A. No. 6713","Facilitation of Child Marriage \u2013 R.A. No. 11596","Title Eight \u2013 Crimes against Persons","Human Trafficking \u2013 R.A. No. 9208, as amended","Violence Against Women and their Children (VAWC) \u2013 R.A. No. 9262","Abuse of Children \u2013 R.A. No. 7610, as amended","Attempt to Commit Child Prostitution \u2013 Sec. 6","Child Prostitution and Other Sexual Abuse \u2013 Sec. 5","Attempt to Commit Child Trafficking \u2013 Sec. 8","Child Trafficking \u2013 Sec. 7","Obscene Publication and Indecent Shows \u2013 Sec. 9","Child Labor \u2013 Sec. 12","Child Marriage \u2013 R.A. No. 11596","Rape, Sexual Exploitation, and Sexual Abuse \u2013 R.A. No. 11648","Sexual Harassment \u2013 R.A. No. 11313, Secs. 3-7, 11-12, and 14","Hazing \u2013 R.A. No. 8049, as amended by R.A. No. 11053","Title Nine \u2013 Crimes against Personal Liberty and Security","Hacking/Cracking \u2013 R.A. No. 8792, Sec. 33(a)","Title Ten \u2013 Crimes against Property","Fencing \u2013 P.D. No. 1612","Cattle Rustling \u2013 P.D. No. 533","Arson \u2013 P.D. No. 1613","Carnapping \u2013 R.A. No. 10883; R.A. No. 11235","Swindling by Syndicate \u2013 P.D. No. 1689","Intellectual Property Piracy \u2013 R.A. No. 8792, Sec. 33(b)","Title Eleven \u2013 Crimes against Chastity","Photo and Video Voyeurism \u2013 R.A. No. 9995","Lascivious Conduct \u2013 R.A. No. 7610, Sec. 5(b)","Title Twelve \u2013 Crimes against the Civil Status of Persons","Title Thirteen \u2013 Crimes against Honor","Cyber Libel \u2013 R.A. No. 10175, Sec. 4(c)(4)","Title Fourteen \u2013 Quasi-offenses \u2013 Moralesv.People, G.R. No. 240337,"]}],"REMEDIAL LAW, LEGAL AND JUDICIAL ETHICS, WITH PRACTICAL EXERCISES (25%)":[{"section":"GENERAL PRINCIPLES","topics":["Concept and Nature of Remedial Law","Procedural Laws Applicable to Actions Pending at the Time of Promulgation","Construction of Procedural Rules","Rule-making Power of the Supreme Court","Classification of Philippine Courts","Hierarchy of Courts","Doctrine of Non-interference or Judicial Stability"]},{"section":"JURISDICTION","topics":["Concept","Distinguished from Exercise of Jurisdiction","Distinguished from Venue","Adherence of Jurisdiction; Residual Jurisdiction; Primary Jurisdiction","How Determined and Conferred","Subject Matter Jurisdiction","Kinds","Original and Appellate","General and Special","Exclusive and Concurrent","Waiver and Compromise","Effect of Estoppel","Error of Jurisdiction","Acquired Jurisdiction","Over the Parties","Jurisdiction over the Plaintiff","Jurisdiction over the Defendant","Over the Issues","Over the Resor Property in Litigation","Jurisdiction of Philippine Courts and Tribunals","Inherent Powers and Means to Carry out Jurisdiction","Supreme Court","Court of Appeals","Sandiganbayan","Court of Tax Appeals","Regional Trial Courts","Family Courts","Special Commercial Courts and Cybercrime Courts","Metropolitan and Municipal Trial Courts \u2013 R.A. No. 11576","Expedited Proceedings \u2013 A.M. No. 08-8-7-SC","LupongTagapamayapa\u2013 R.A. No. 7160, Secs. 408, 409, and 412"]},{"section":"CIVIL PROCEDURE","topics":["Classification of Actions","Ordinary and Special","Personal and Real","InRem, InPersonam, and QuasiInRem","Cause of Action \u2013 Rule 2","Parties to Civil Actions \u2013 Rule 3","Venue \u2013 Rule 4","Pleadings","Kinds \u2013 Rule 6","Parts \u2013 Rule 7","Allegations \u2013 Rule 8","Effect of Failure to Plead \u2013 Rule 9, Secs. 1 and 2","Amended and Supplemental Pleadings \u2013 Rule 10","Filing of Responsive Pleadings \u2013 Rule 11","Bill of Particulars \u2013 Rule 12","Filing and Service of Pleadings \u2013 Rule 13","Efficient Use of Paper Rule \u2013 A.M. No. 11-9-4-SC","Electronic Filing and Service \u2013 A.M. No. 10-3-7-SC; A.M. No. 11-9-4-SC","Summons \u2013 Rule 14","Issuance; Contents","By Whom Issued","Service","By Whom Made","Modes","Personal","Substituted","Extraterritorial","Hague Service Convention; Administrative Order [A.O.]","Upon Specific Persons and Entities","Entity without Juridical Personality","Prisoners","Minors and Incompetents","Spouses (Relate to Rule 3, Sec. 4)","Domestic Private Juridical Entity","Foreign Private Juridical Entity","Public Corporations","Defendant whose Identity or Whereabouts Unknown","Residents Temporarily out of the Philippines","Proof; Alias Summons","Return","Voluntary Appearance","Duty of Counsel of Record","Motions \u2013 Rule 15","Distinguished from Pleadings","Litigious and Non-litigious Motions","Prohibited Motions","Omnibus Motion","Dismissal and Default","Dismissal upon Notice by Plaintiff; Two-dismissal Rule \u2013 Rule 17, Sec. 1","Dismissal due to Fault of Plaintiff \u2013 Rule 17, Sec. 3","Dismissal with Prejudice v. Dismissal without Prejudice","Default \u2013 Rule 9, Sec. 3","Pre-trial \u2013 Rule 18 and A.M. No. 03-1-09-SC","Court-Annexed Mediation (CAM)","Judicial Dispute Resolution (JDR)","Intervention \u2013 Rule 19","Calendar of Cases \u2013 Rule 20","Subpoena \u2013 Rule 21","Computation of Time \u2013 Rule 22","Modes of Discovery \u2013 Rules 23-29","Trial \u2013 Rule 30","Consolidation or Severance \u2013 Rule 31","Demurrer to Evidence \u2013 Rule 33","Denial","Consequences","Remedy","Consequences of Grant","Reversal of Demurrer on Appeal","Judgments and Final Orders","How Rendered \u2013 Rule 36","Judgment on the Pleadings \u2013 Rule 34","Summary Judgments \u2013 Rule 35","Post-judgment Remedies","New Trial \u2013 Rule 37","Reconsideration \u2013 Rule 37","Remedy against Denial","Fresh Period Rule","Relief from Judgment \u2013 Rule 38","Annulment of Judgment \u2013 Rule 47","Collateral Attack","Appeal and Review","Coverage","Subjects of Appeal and Review","Matters not Appealable","Periods for Filing","Perfection of Appeal","Issues Cognizable","Modes","Appeal from the Regional Trial Courts \u2013 Rule 41","Appeal by Certiorarito the Supreme Court \u2013 Rule 45","Execution, Satisfaction, and Effect of Judgments \u2013 Rule 39","Immutability of Final Judgments","Execution as a Matter of Right and of Discretion","When Execution shall Issue","How a Judgment is Executed","By Motion or Independent Action","Execution of Judgments for Money","Execution of Judgments for Specific Acts","Execution of Special Judgments","Requisites before Demolition Order is Issued","Effect of Levy on Third Persons","Properties Exempt from Execution","Proceedings where Property is Claimed by Third Persons","Effect of Judgment or Final Orders","ResJudicata","Bar by Prior Judgment","Conclusiveness of Judgment","Enforcement and Effect of Foreign Judgments or Final Orders"]},{"section":"PROVISIONAL REMEDIES","topics":["Nature and Purpose","Preliminary Attachment \u2013 Rule 57","Grounds for Issuance","Grounds for Dissolution","Posting of a Counterbond","Preliminary Injunction \u2013 Rule 58","Requisites","Kinds","Grounds for Issuance","Receivership \u2013 Rule 59","Replevin \u2013 Rule 60","Support PendenteLite\u2013 Rule 61"]},{"section":"SPECIAL CIVIL ACTIONS","topics":["Concept","Interpleader \u2013 Rule 62","Declaratory Relief and Similar Remedies \u2013 Rule 63","Certiorari, Prohibition, and Mandamus\u2013 Rule 65","QuoWarranto\u2013 Rule 66","Expropriation \u2013 Rule 67; R.A. No. 8974, Sec. 4","Stages of Expropriation","Immediate Possession of Expropriated Land \u2013 R.A. No. 10752","Ascertainment of Just Compensation","Foreclosure of Real Estate Mortgage \u2013 Rule 68; R.A. No. 8791, Sec. 47","Judicial","Extrajudicial \u2013 Act No. 3135","Partition \u2013 Rule 69","Forcible Entry and Unlawful Detainer \u2013 Rule 70","Contempt \u2013 Rule 71"]},{"section":"SPECIAL PROCEEDINGS AND WRITS","topics":["Settlement of Estate of Deceased Persons","Venue and Process \u2013 Rule 73","Extrajudicial \u2013 Rule 74, Secs. 1, 4, and 5","Judicial","Summary Settlement \u2013 Rule 74, Secs. 2-5","Intestate \u2013 Petition for Letters of Administration \u2013 Rules 78-79","Testate \u2013 Probate Proceedings","Allowance or Disallowance of Will \u2013 Rules 76-77","Letters Testamentary","Issuance \u2013 Rule 78","Opposition \u2013 Rule 79","Claims against Estate \u2013 Rule 86","Payment of the Debts of the Estate \u2013 Rule 88","Distribution and Partition of the Estate \u2013 Rule 90","Guardianship \u2013 Rules 92-97","HabeasCorpus\u2013 Rule 102","HabeasCorpusin Relation to Custody of Minors \u2013 A.M. No. 03-04-04-SC","Amparo\u2013 A.M. No. 07-9-12-SC","HabeasData\u2013 A.M. No. 08-1-16-SC","Change of Name \u2013 Rule 103","Cancellation or Correction of Entries in the Civil Registry \u2013 Rule 108","Environmental Cases \u2013 A.M. No. 09-6-8-SC","Temporary Environmental Protection Order (TEPO)","Writ of Continuing Mandamus","Writ of Kalikasan"]},{"section":"CRIMINAL PROCEDURE","topics":["Criminal Jurisdiction","Concept","Requisites","Prosecution of Offenses \u2013 Rule 110","Institution of Criminal Actions","Effect of the Institution of the Criminal Action on the Prescriptive Period","Who may Prosecute; Crimes that Cannot be Prosecuted DeOficio","Intervention of Private Offended Party","Control of Prosecution","Complaint and Information; Sufficiency","Date of Commission of the Offense","Designation of Offense; Qualifying and Aggravating Circumstances","Name of the Accused; Name of the Offended Party","Amendment and Substitution of Complaint or Information","Duplicity of the Offense","Prosecution of Civil Action \u2013 Rule 111","Implied Institution of Civil Action ExDelicto","Independent Civil Actions","Reservation, Suspension, and Waiver","In B.P. Blg. 22 Cases","Civil Liability ExDelicto","When Accused Acquitted","When Accused Dies","Prejudicial Question","Preliminary Investigation \u2013 Rule 112","Nature and Purpose","Who may Conduct \u2013 R.A. No. 10071","When not Required","Determination of Probable Cause","Nature; Non-interference","Remedy from Investigator\u2019s Action","Motion to Reopen","Motion for Reinvestigation","Inquest","Effect of Absence","Withdrawal of Information","Arrest \u2013 Rule 113","Warranted Arrest","How Made","Requisites for the Issuance of a Warrant of Arrest","Warrantless Arrest, When Lawful","Method of Arrest","Use of Body Cameras \u2013 A.M. No. 21-06-08","Waiver of Objections to Irregularity","Bail \u2013 Rule 114","When a Matter of Right; Exceptions","When a Matter of Discretion","Where Filed","Application for Bail in Capital Offenses","Guidelines in Fixing Amount","Bail-negating Circumstances","Remedy When Denied","Forfeiture","Recognizance \u2013 R.A. No. 10389","Rights of Accused \u2013 Rule 115","Rights of Accused at Trial","Rights of Persons under Custodial Investigation","Arraignment and Plea \u2013 Rule 116","Purpose of Arraignment","Searching Inquiry","Guilty Plea","Lesser Offense","Capital Offense","Non-capital Offense","Improvident Plea","Bill of Particulars","Suspension of Arraignment","Motion to Quash \u2013 Rule 117","Grounds","Double Jeopardy","Provisional Dismissal","Pre-trial \u2013 Rule 118","Pre-trial Agreement","Non-appearance at Pre-trial Conference","Pre\u2013trial Order","Cases for Mediation on the Civil Liability","Trial \u2013 Rule 119","Trial InAbsentia","Remedy when Accused is Not Brought to Trial within the Time Limit","Conditional Examination of Witness for the Prosecution or Defense","Requisites for Discharge of Accused as State Witness","Reopening of the Proceedings","Demurrer to Evidence","Judgment \u2013 Rule 120","Requisites of a Valid Judgment","Promulgation of Judgment","Non-appearance of Accused","Promulgation InAbsentia","New Trial or Reconsideration \u2013 Rule 121","Appeal \u2013 Rule 122","Search and Seizure \u2013 Rule 126","Warranted Search and Seizure","Search Warrant","Nature","Requisites for Issuance","Probable Cause","Quashal","Cybercrime Warrants \u2013 A.M. No. 17-11-03-SC","Searches in State Detention Facilities","Extent of Search","Conduct of Search","Warrantless Search","Incidental to Lawful Arrest","Moving Vehicle","Public Transit or Public Utility Vehicles","Checkpoints","Airport Frisking","Buy-bust Operation","Plain View","Stop and Frisk","Consented Searches","Effect of Illegal Search and Seizure","Provisional Remedies in Criminal Cases \u2013 Rule 127"]},{"section":"EVIDENCE","topics":["General Provisions and Principles \u2013 Rule 128","Definition of Evidence","Uniformity of Evidentiary Rules","Proof v. Evidence","FactumProbansv. FactumProbandum","Liberal Construction of the Rules on Evidence","Judicial Notice \u2013 Rule 129, Secs. 1-3","Judicial Admissions \u2013 Rule 129, Sec. 4","Admissibility","Requisites \u2013 Rule 128, Sec. 3","Relevance; Collateral Matters \u2013 Rule 128, Sec. 4","Multiple Admissibility","Conditional Admissibility","Curative Admissibility","Weight and Sufficiency \u2013 Rule 133","Standards","Proof Beyond Reasonable Doubt","Preponderance of Evidence","Substantial Evidence","Clear and Convincing Evidence","Direct and Circumstantial Evidence","Competent and Credible Evidence","Positive and Negative Evidence","Kinds","Object or Real Evidence \u2013 Rule 130, Part A","Requisites for Admissibility","Categories of Object Evidence","Chain of Custody","Rule on DNA Evidence \u2013 A.M. No. 06-11-5-SC","Documentary Evidence \u2013 Rule 130, Part B","Original Documents and Secondary Evidence","Parol Evidence","Interpretation of Documents","Electronic Documents and Electronic Signatures \u2013 A.M. No. 01-7-01-SC,","Testimonial Evidence \u2013 Rule 130, Part C","Concept","Who may be Witnesses","Children \u2013 A.M. No. 04-07-SC, Sec. 6","Disqualification of Witnesses","Testimonial Privilege","Admissions and Confessions","Previous Conduct as Evidence","Hearsay Rule and Exceptions","Opinion Rule","Character Evidence","Presentation of Evidence \u2013 Rule 132","Examination of a Witness","Rights and Obligations of a Witness","Examination of Child Witness \u2013 A.M. No. 04-07-SC","Judicial Affidavit in lieu of Direct Examination \u2013 A.M. No. 12-8-8-SC","Authentication and Proof of Documents","Meaning of Authentication","Classes of Documents","Authentication of Private Writings","Public Documents as Evidence","Proof of Official Record","Offer and Objection","When Evidence Offered","Objection to Evidence","Tender of Excluded Evidence","Burden of Proof and Burden of Evidence \u2013 Rule 131, Sec. 1","Presumptions","Conclusive Presumptions \u2013 Rule 131, Sec. 2","Disputable Presumptions \u2013 Rule 131, Sec. 3","Presumptions in Civil Actions and Proceedings \u2013 Rule 131, Sec. 5","Presumption against an Accused in Criminal Cases \u2013 Rule 131, Sec. 6","Rules on the Transmission and Execution of Letters of Request for Taking of Evidence in Civil or Commercial Matters under the 1970 Hague Evidence Convention \u2013 A.M. No. 25-02-17-SC","Scope and Applicability \u2013 Sec. 1","Definition of Terms \u2013 Sec. 2","Use of Evidence Taken Abroad \u2013 Sec. 18","Effect of Using Evidence Taken Abroad \u2013 Sec. 19","Admissibility of Evidence Taken Abroad \u2013 Sec. 20","Privileges \u2013 Sec. 33","Interpretation of the Rules \u2013 Sec. 34"]},{"section":"LEGAL AND JUDICIAL ETHICS","topics":["Practice of Law","Definition and Nature \u2013 CPRA, Canon III, Sec. 1","Admission to the Practice of Law","Legal Education","Pre-law","Law Proper","R.A. No. 7662 (Legal Education Reform Act)","Citizenship","Good Moral Character","Bar Examinations","Lawyer\u2019s Oath (Revised as of April 11, 2023)","Signing in the Roll of Attorneys","Continuing Requirements for Membership in the Bar","Mandatory Continuing Legal Education (MCLE) \u2013 CPRA, Canon III,","Membership Dues \u2013 CPRA, Canon III, Sec. 26","Professional Tax \u2013 R.A. No. 7160, Sec. 139","Legal Aid \u2013 CPRA, Canon III, Sec. 25; A.M. No. 22-11-01-SC,","Who May Practice Law","Members of the Bar","Suspended or Disbarred Lawyers \u2013 CPRA, Canon VI, Sec. 52","Non-members of the Bar","Law Students \u2013 A.M. No. 19-03-24-SC","Paralegals \u2013 CPRA, Canon II, Secs. 34-35","Parties and their Agents or Appearance ProSe","Cadastral Proceedings \u2013 Act No. 2259, Sec. 9","Labor Cases \u2013 LC, Art. 228","BarangayConciliation \u2013 R.A. No. 7160, Sec. 415","Cases under Expedited Procedure \u2013 A.M. No. 08-8-7-SC,","Arbitration \u2013 R.A. No. 9285, Sec. 22; R.A. No. 876, Sec. 12","Members of the Bar Prohibited from Private Practice","Senators and Members of the House of Representatives","Members of the Constitutional Commissions","Ombudsman and their Deputies","Justices, Judges, and Court Employees","Governors and Mayors \u2013 R.A. No. 7160, Sec. 90(a)","Members of the Bar with Limited Legal Practice","Government Lawyers","With Authority to Engage in Limited Law Practice","Separated from the Service \u2013 R.A. No. 6713","Retired Judges and Justices \u2013 R.A. No. 910, as amended","In Small Claims and KatarungangPambarangay","Foreign Lawyers \u2013 CPRA, Canon III, Sec. 33","Privileges of a Lawyer","Unauthorized Practice of Law","Penalties","Duties and Responsibilities of Lawyers \u2013 CPRA","General Provisions","Integrity as Central Principle \u2013 Preamble","Applicability of CPRA \u2013 Sec. 1","Repealing Clause \u2013 Sec. 2","Effectivity Date \u2013 Sec. 3","Independence \u2013 Canon I","Concept \u2013 Introduction and Sec. 1","Accessible, Efficient, and Effective Legal Service","Merit-based Legal Practice","Avoiding Improper Considerations and External Influence","Non-interference in Courts or Tribunals","Discretion in Procedure and Strategy","Client\u2019s Decision to Settle Case","Propriety \u2013 Canon II","Concept \u2013 Introduction","Proper and Dignified Conduct \u2013 Secs. 1 and 2","Reporting Dishonest, Deceitful, or Misleading Conduct \u2013 Sec. 12","Disclosure of Relationship or Connection \u2013 Sec. 20","Non-solicitation and Advertisement \u2013 Sec. 17","SubJudiceRule \u2013 Sec. 19","Responsible Use of Social Media \u2013 Secs. 36-44","Fidelity \u2013 Canon III","Concept \u2013 Introduction and Sec. 2","Lawyer-Client Relationship","Definition \u2013 Sec. 3","Duty of Representation","Authority of Lawyer to Bind Client \u2013 Sec. 4","Authority of Lawyer to Appear \u2013 Sec. 5","Fiduciary Duty \u2013 Sec. 6","Encouragement of Settlement \u2013 Sec. 8","Rectification of Fraud \u2013 Sec. 9","Lawyer\u2019s Right to Compensation","Attorney\u2019s Fees \u2013 Secs. 41-48","Attorney\u2019s Lien \u2013 Sec. 47","Management of Client Resources","Lending and Borrowing \u2013 Sec. 52","Keeping Client Confidences \u2013 Secs. 27-30","Duty to Provide Regular Updates \u2013 Canon IV, Sec. 6","Termination \u2013 Secs. 53-56","By the Lawyer","By the Client","By Death of Either Party","Accounting and Turnover of Funds","Conflict of Interest \u2013 Secs. 13-22","Responsibilities of Solo Practitioners \u2013 Canon II, Sec. 25","Responsibilities of Government Lawyers and Prosecutors \u2013","General Duties of Confidentiality \u2013 Secs. 31 and 32","Limited Legal Services \u2013 Secs. 35-40","Competence and Diligence \u2013 Canon IV","General Duty of Competence \u2013 Sec. 1; Sec. 2, first sentence","Collaboration with other Counsel \u2013 Sec. 2","Avoidance of Delay \u2013 Sec. 3, first sentence; Secs. 4 and 7","Punctuality \u2013 Sec. 3, second sentence","Responding to Inquiries \u2013 Sec. 5","Multiple Professions; Business \u2013 Secs. 9 and 10","Equality \u2013 Canon V","Non-discrimination \u2013 Secs. 1 and 4","Higher Standard of Service to Vulnerable Persons \u2013 Sec. 2","Representation of Indigents \u2013 Sec. 3","Discipline and Disbarment of Lawyers \u2013 CPRA, Canon VI","Nature of Bar Discipline Proceedings","Non-penal; Public Welfare Measure","Not Subject to Desistance or Compromise \u2013 Sec. 16","Institution of Bar Discipline Proceedings \u2013 Secs. 2, 3, and 30","Against Government Lawyers \u2013 Sec. 6","Against Members of the Judiciary \u2013 Sec. 2","Charges and Sanctions \u2013 Secs. 33-37","Preventive Suspension \u2013 Sec. 31","Quantum and Burden of Proof \u2013 Sec. 32","Executory Nature of Decision or Resolution \u2013 Sec. 43","Sworn Statement After Service of Suspension \u2013 Secs. 45 and 46","Clemency \u2013 Secs. 47-51","Notarial Practice \u2013 A.M. No. 02-8-13-SC, as amended","Qualifications","Term of Office","Powers and Limitations","Notarial Register","Jurisdiction and Place of Notarization","Competent Evidence of Identity","Sanctions","Remote Notarization \u2013 A.M. No. 20-07-04-SC, July 14, 2020","Judicial Ethics","Sources","New Code of Judicial Conduct (NCJC) \u2013 A.M. No. 03-05-01-SC","Bangalore Principles of Judicial Conduct 2002","1989 Code of Judicial Conduct (1989 CJC)","Rules of Court","Principles","Independence \u2013 NCJC, Canon 1; 1989 CJC, Canon 1","Integrity \u2013 NCJC, Canon 2; 1989 CJC, Canon 1, Rules 3.02 to 3.05","Impartiality \u2013 NCJC, Canon 3; 1989 CJC, Canon 3","Propriety \u2013 NCJC, Canon 4; 1989 CJC Canon 5, Rule 3.03,","Conditions to Engage in Business \u2013 1989 CJC, Canon 5,","Conditions for Teaching \u2013 A.M. No. 13-05-05-SC;","Purchase of Property in Litigation \u2013 NCC, Art. 1491(5)","Equality \u2013 NCJC, Canon 5","Administration and Discipline of Judges","Disciplinary Proceedings against Members of the Judiciary","Impeachment \u2013 1987 Constitution, Art. XI, Sec. 2","Judicial Disciplinary Proceedings \u2013 Rule 140","Institution \u2013 Secs. 1 and 2","Dual Nature \u2013 Sec. 4; A.M. No. 02-9-02-SC","Charges \u2013 Secs. 13-16","Sanctions \u2013 Secs. 17-23","Clemency"]},{"section":"PRACTICAL EXERCISES","topics":["Promissory Note or Simple Loan Agreement","Demand and Authorization Letters","Sale Contract","Lease Contract","Special Power of Attorney","Verification and Certification Against Forum Shopping","Extra-judicial Settlement of Estate","Judicial Affidavit","Notarial Acts","Jurat","Acknowledgment","Copy Certification","Motions","To Dismiss","To Declare Defendant in Default","Execution of Judgment","Quitclaim in Labor Cases","Information","Consummated Crimes","Frustrated Crimes","Attempted Crimes"]}]};
 
-window.storage = {
-  async get(key){
-    const v = localStorage.getItem(key);
-    return v === null ? null : { value: v };
-  },
-  async set(key, value){
-    localStorage.setItem(key, value);
-    return { value };
-  },
-  async delete(key){
-    localStorage.removeItem(key);
-  }
+const SUBJECT_SYLLABUS_MAP={
+  "Political Law & PIL":"POLITICAL AND PUBLIC INTERNATIONAL LAW (15%)",
+  "Commercial Law & Taxation":"COMMERCIAL AND TAXATION LAWS (20%)",
+  "Civil Law & Land Titles":"CIVIL LAW AND LAND TITLES AND DEEDS (20%)",
+  "Labor Law & Social Legislation":"LABOR AND SOCIAL LEGISLATION (10%)",
+  "Criminal Law":"CRIMINAL LAW (10%)",
+  "Remedial Law & Ethics":"REMEDIAL LAW, LEGAL AND JUDICIAL ETHICS, WITH PRACTICAL EXERCISES (25%)",
 };
-
-(function(){
 const SUBJECTS=[
   {name:"Political Law & PIL",short:"Pol. Law",color:"#2a78d6",weight:.15},
   {name:"Commercial Law & Taxation",short:"Commercial",color:"#eda100",weight:.20},
@@ -116,21 +116,226 @@ const SUBJECTS=[
 ];
 const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
+// ── State ──────────────────────────────────────────────────────────────────
 let state={
   view:"dashboard",
   sessions:[],
-  settings:{examDate:"2026-11-08",dailyTarget:10,totalTarget:1000},
+  settings:{examDate:"2026-09-06",dailyTarget:10,totalTarget:1000},
   streak:{current:0,longest:0,lastDate:null},
   loading:true,
   form:{date:todayStr(),subject:"Civil Law & Land Titles",topic:"",hours:"",studied:"",struggled:""},
+  editId:null,
   saved:false,
   filter:"All",
+  syllabusOpenSections:{},
+  syllabusSubject:"Political Law & PIL",
+  syllabusChecked:{},
+  tlRange:14,
 };
 
+// ── Timer ──────────────────────────────────────────────────────────────────
+let timer={running:false,startMs:0,elapsed:0,iv:null};
+
+function toggleTimer(){
+  if(timer.running){
+    timer.elapsed+=Date.now()-timer.startMs;
+    clearInterval(timer.iv);
+    timer.running=false;
+    document.getElementById("timer-toggle-btn").className="timer-btn start";
+    document.getElementById("timer-toggle-btn").textContent="Start";
+    document.getElementById("timer-use-btn").style.display="";
+    document.getElementById("timer-reset-btn").style.display="";
+    document.getElementById("timer-display").classList.remove("running");
+  } else {
+    timer.startMs=Date.now();
+    timer.running=true;
+    timer.iv=setInterval(tickTimer,1000);
+    document.getElementById("timer-toggle-btn").className="timer-btn stop";
+    document.getElementById("timer-toggle-btn").textContent="Stop";
+    document.getElementById("timer-use-btn").style.display="none";
+    document.getElementById("timer-reset-btn").style.display="none";
+    document.getElementById("timer-display").classList.add("running");
+  }
+}
+function tickTimer(){
+  const total=Math.floor((timer.elapsed+(Date.now()-timer.startMs))/1000);
+  const h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;
+  const el=document.getElementById("timer-display");
+  if(el) el.textContent=h>0?`${h}:${pad(m)}:${pad(s)}`:`${pad(m)}:${pad(s)}`;
+}
+function resetTimer(){
+  clearInterval(timer.iv);
+  timer={running:false,startMs:0,elapsed:0,iv:null};
+  document.getElementById("timer-display").textContent="00:00";
+  document.getElementById("timer-display").classList.remove("running");
+  document.getElementById("timer-toggle-btn").className="timer-btn start";
+  document.getElementById("timer-toggle-btn").textContent="Start";
+  document.getElementById("timer-use-btn").style.display="none";
+  document.getElementById("timer-reset-btn").style.display="none";
+}
+function useTimerTime(){
+  const secs=Math.floor(timer.elapsed/1000);
+  const hrs=Math.round((secs/3600)*4)/4; // round to nearest 0.25
+  const hrsStr=hrs.toFixed(2).replace(/\.?0+$/,"");
+  state.form={...state.form,hours:hrsStr};
+  const el=document.getElementById("hours-input");
+  if(el){el.value=hrsStr;}
+  showToast(`Timer: ${hrsStr}h applied to hours field`);
+}
+function pad(n){return String(n).padStart(2,"0");}
+
+// ── Toast ──────────────────────────────────────────────────────────────────
+let toastTimeout=null;
+let pendingUndo=null;
+function showToast(msg,undoFn){
+  clearTimeout(toastTimeout);
+  const t=document.getElementById("toast");
+  const m=document.getElementById("toast-msg");
+  const u=document.getElementById("toast-undo");
+  m.textContent=msg;
+  pendingUndo=undoFn||null;
+  u.className=undoFn?"":"hidden";
+  t.classList.remove("hidden");
+  toastTimeout=setTimeout(()=>t.classList.add("hidden"),3500);
+}
+function undoAction(){
+  if(pendingUndo){pendingUndo();pendingUndo=null;}
+  document.getElementById("toast").classList.add("hidden");
+}
+
+// ── Storage (localStorage shim) ────────────────────────────────────────────
+window.storage={
+  async get(k){const v=localStorage.getItem(k);return v===null?null:{value:v};},
+  async set(k,v){localStorage.setItem(k,v);return{value:v};},
+  async delete(k){localStorage.removeItem(k);}
+};
+
+// ── Helpers ────────────────────────────────────────────────────────────────
 function todayStr(){return new Date().toISOString().split("T")[0];}
 function fmt1(n){return parseFloat(n||0).toFixed(1);}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function escHtml(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function isDark(){return window.matchMedia?.("(prefers-color-scheme:dark)").matches;}
 
+// ── Syllabus helpers ───────────────────────────────────────────────────────
+function getTopicsForSubject(subjectName){
+  const key=SUBJECT_SYLLABUS_MAP[subjectName];
+  if(!key||!SYLLABUS[key])return[];
+  return SYLLABUS[key].flatMap(s=>s.topics);
+}
+function getSectionsForSubject(subjectName){
+  const key=SUBJECT_SYLLABUS_MAP[subjectName];
+  return SYLLABUS[key]||[];
+}
+function updateTopicDatalist(subjectName){
+  const dl=document.getElementById("topic-datalist");
+  if(!dl)return;
+  const topics=getTopicsForSubject(subjectName);
+  dl.innerHTML=topics.map(t=>`<option value="${escHtml(t)}">`).join("");
+}
+
+// ── Persistence ────────────────────────────────────────────────────────────
+async function persist(){
+  await window.storage.set("bar_v4_sessions",JSON.stringify(state.sessions));
+  await window.storage.set("bar_v4_settings",JSON.stringify(state.settings));
+  await window.storage.set("bar_v4_streak",JSON.stringify(state.streak));
+  await window.storage.set("bar_v4_sylchecked",JSON.stringify(state.syllabusChecked));
+}
+async function load(){
+  try{const r=await window.storage.get("bar_v4_sessions");if(r)state.sessions=JSON.parse(r.value);}catch{}
+  try{const r=await window.storage.get("bar_v4_settings");if(r)state.settings={...state.settings,...JSON.parse(r.value)};}catch{}
+  try{const r=await window.storage.get("bar_v4_streak");if(r)state.streak=JSON.parse(r.value);}catch{}
+  try{const r=await window.storage.get("bar_v4_sylchecked");if(r)state.syllabusChecked=JSON.parse(r.value);}catch{}
+  // Ensure all sessions have IDs (migrate old data)
+  state.sessions=state.sessions.map(s=>s.id?s:{...s,id:uid()});
+  state.loading=false;
+  render();
+}
+
+// ── CRUD ───────────────────────────────────────────────────────────────────
+async function saveSession(){
+  const h=parseFloat(state.form.hours);
+  if(!state.form.topic.trim()||!h||h<=0){
+    showToast("Please enter a topic and hours.");
+    return;
+  }
+  if(state.editId){
+    // Update existing
+    state.sessions=state.sessions.map(s=>
+      s.id===state.editId?{...s,...state.form,hours:h,id:s.id}:s
+    );
+    state.editId=null;
+    await persist();
+    state.form={...state.form,topic:"",hours:"",studied:"",struggled:""};
+    state.saved=true;render();
+    showToast("Session updated");
+    setTimeout(()=>{state.saved=false;state.view="history";render();},1200);
+  } else {
+    // Create new
+    const session={id:uid(),...state.form,hours:h};
+    state.sessions=[...state.sessions,session];
+    const today=todayStr();
+    const yest=new Date();yest.setDate(yest.getDate()-1);
+    const yd=yest.toISOString().split("T")[0];
+    const sk=state.streak;
+    if(sk.lastDate!==today){
+      sk.current=sk.lastDate===yd?(sk.current||0)+1:1;
+      sk.longest=Math.max(sk.longest||0,sk.current);
+      sk.lastDate=today;
+    }
+    await persist();
+    state.saved=true;
+    state.form={...state.form,topic:"",hours:"",studied:"",struggled:""};
+    render();
+    showToast("Session saved ✓");
+    setTimeout(()=>{state.saved=false;state.view="dashboard";render();},1500);
+  }
+}
+
+function editSession(id){
+  const s=state.sessions.find(x=>x.id===id);
+  if(!s)return;
+  state.form={date:s.date,subject:s.subject,topic:s.topic,hours:s.hours,studied:s.studied||"",struggled:s.struggled||""};
+  state.editId=id;
+  state.view="log";
+  render();
+  setTimeout(()=>updateTopicDatalist(s.subject),50);
+}
+
+async function deleteSession(id){
+  const deleted=state.sessions.find(s=>s.id===id);
+  state.sessions=state.sessions.filter(s=>s.id!==id);
+  await persist();
+  render();
+  showToast(`Session deleted`,()=>{
+    state.sessions=[...state.sessions,deleted].sort((a,b)=>a.date.localeCompare(b.date));
+    persist();render();
+    showToast("Restored ✓");
+  });
+}
+
+async function saveSettings(){
+  await window.storage.set("bar_v4_settings",JSON.stringify(state.settings));
+}
+
+// ── Derived ────────────────────────────────────────────────────────────────
+function derived(){
+  const s=state;
+  const today=todayStr();
+  const daysLeft=Math.max(0,Math.ceil((new Date(s.settings.examDate)-new Date())/86400000));
+  const todayHours=s.sessions.filter(x=>x.date===today).reduce((a,x)=>a+(x.hours||0),0);
+  const totalHours=s.sessions.reduce((a,x)=>a+(x.hours||0),0);
+  const uniqueDays=new Set(s.sessions.map(x=>x.date)).size;
+  const avgHours=uniqueDays>0?totalHours/uniqueDays:0;
+  const subjectStats=SUBJECTS.map(sub=>({
+    ...sub,
+    hours:s.sessions.filter(x=>x.subject===sub.name).reduce((a,x)=>a+(x.hours||0),0),
+    target:Math.round(sub.weight*(s.settings.totalTarget||1000)),
+  }));
+  return{daysLeft,todayHours,totalHours,uniqueDays,avgHours,subjectStats};
+}
+
+// ── Heatmap ────────────────────────────────────────────────────────────────
 function heatColor(hrs,future){
   const dark=isDark();
   if(future)return dark?"#2c2c2a":"#e1e0d9";
@@ -140,7 +345,6 @@ function heatColor(hrs,future){
   if(hrs<9)return dark?"#378add":"#378add";
   return"#ba7517";
 }
-
 function buildHeatmap(sessions){
   const now=new Date();
   const start=new Date(now);
@@ -159,76 +363,82 @@ function buildHeatmap(sessions){
   return weeks;
 }
 
-async function load(){
-  try{const r=await window.storage.get("bar_v4_sessions");if(r)state.sessions=JSON.parse(r.value);}catch{}
-  try{const r=await window.storage.get("bar_v4_settings");if(r)state.settings={...state.settings,...JSON.parse(r.value)};}catch{}
-  try{const r=await window.storage.get("bar_v4_streak");if(r)state.streak=JSON.parse(r.value);}catch{}
-  state.loading=false;
-  render();
+// ── Session row ────────────────────────────────────────────────────────────
+function sessionRowHTML(x,expanded,editable){
+  const sub=SUBJECTS.find(s=>s.name===x.subject)||{color:"var(--fill-accent)",name:x.subject};
+  return`
+  <div class="sess-row">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+          <span style="width:7px;height:7px;border-radius:50%;background:${sub.color};display:inline-block;flex-shrink:0"></span>
+          <span style="font-size:11px;color:var(--text-muted);font-weight:500">${escHtml(x.subject)}</span>
+        </div>
+        <div style="font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(x.topic)}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+        <div style="text-align:right">
+          <div style="font-size:17px;font-weight:500">${x.hours}h</div>
+          <div style="font-size:11px;color:var(--text-muted)">${x.date}</div>
+        </div>
+        ${editable?`
+        <div style="display:flex;gap:4px">
+          <button class="icon-btn primary" onclick="editSession('${x.id}')"><i class="ti ti-pencil"></i></button>
+          <button class="icon-btn danger" onclick="deleteSession('${x.id}')"><i class="ti ti-trash"></i></button>
+        </div>`:""}
+      </div>
+    </div>
+    ${expanded&&(x.studied||x.struggled)?`
+    <div style="margin-top:10px;padding-top:10px;border-top:.5px solid var(--border)">
+      ${x.studied?`<div style="margin-bottom:8px"><div style="font-size:11px;font-weight:500;color:var(--text-success);margin-bottom:3px">Studied</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.5">${escHtml(x.studied)}</div></div>`:""}
+      ${x.struggled?`<div><div style="font-size:11px;font-weight:500;color:var(--text-danger);margin-bottom:3px">Struggled with</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.5">${escHtml(x.struggled)}</div></div>`:""}
+    </div>`:""}
+  </div>`;
 }
 
-async function saveSession(){
-  const h=parseFloat(state.form.hours);
-  if(!state.form.topic.trim()||!h||h<=0)return;
-  const session={id:Date.now().toString(),...state.form,hours:h};
-  state.sessions=[...state.sessions,session];
-  const today=todayStr();
-  const yest=new Date();yest.setDate(yest.getDate()-1);
-  const yd=yest.toISOString().split("T")[0];
-  const sk=state.streak;
-  if(sk.lastDate!==today){
-    sk.current=sk.lastDate===yd?(sk.current||0)+1:1;
-    sk.longest=Math.max(sk.longest||0,sk.current);
-    sk.lastDate=today;
-    try{await window.storage.set("bar_v4_streak",JSON.stringify(sk));}catch{}
+// ── Timeline view ──────────────────────────────────────────────────────────
+function buildTimeline(sessions,days){
+  const now=new Date();
+  const result=[];
+  for(let i=days-1;i>=0;i--){
+    const d=new Date(now);d.setDate(now.getDate()-i);
+    const ds=d.toISOString().split("T")[0];
+    const daySessions=sessions.filter(s=>s.date===ds);
+    const total=daySessions.reduce((a,s)=>a+(s.hours||0),0);
+    const bySubject=SUBJECTS.map(sub=>({
+      ...sub,
+      hours:daySessions.filter(s=>s.subject===sub.name).reduce((a,s)=>a+(s.hours||0),0),
+    }));
+    result.push({date:ds,day:d.getDate(),month:d.getMonth(),weekday:["Su","Mo","Tu","We","Th","Fr","Sa"][d.getDay()],total,bySubject});
   }
-  try{await window.storage.set("bar_v4_sessions",JSON.stringify(state.sessions));}catch{}
-  state.saved=true;state.form={...state.form,topic:"",hours:"",studied:"",struggled:""};
-  render();
-  setTimeout(()=>{state.saved=false;state.view="dashboard";render();},1500);
+  return result;
 }
 
-async function saveSettings(){
-  try{await window.storage.set("bar_v4_settings",JSON.stringify(state.settings));}catch{}
-}
-
-function derived(){
-  const s=state;
-  const today=todayStr();
-  const daysLeft=Math.max(0,Math.ceil((new Date(s.settings.examDate)-new Date())/86400000));
-  const todayHours=s.sessions.filter(x=>x.date===today).reduce((a,x)=>a+(x.hours||0),0);
-  const totalHours=s.sessions.reduce((a,x)=>a+(x.hours||0),0);
-  const uniqueDays=new Set(s.sessions.map(x=>x.date)).size;
-  const avgHours=uniqueDays>0?totalHours/uniqueDays:0;
-  const subjectStats=SUBJECTS.map(sub=>({
-    ...sub,
-    hours:s.sessions.filter(x=>x.subject===sub.name).reduce((a,x)=>a+(x.hours||0),0),
-    target:Math.round(sub.weight*(s.settings.totalTarget||1000)),
-  }));
-  return{daysLeft,todayHours,totalHours,uniqueDays,avgHours,subjectStats};
-}
-
+// ── Render ─────────────────────────────────────────────────────────────────
 function render(){
   const el=document.getElementById("root");
   if(!el)return;
-  if(state.loading){el.innerHTML='<div style="padding:40px;text-align:center;color:var(--text-muted)">Loading your study data…</div>';return;}
+  if(state.loading){el.innerHTML='<div style="padding:40px;text-align:center;color:var(--text-muted)">Loading…</div>';return;}
   const d=derived();
-  const today=todayStr();
-  const heatmap=buildHeatmap(state.sessions);
   const s=state;
   const pct=(a,b)=>b>0?Math.min(100,Math.round((a/b)*100)):0;
   const todayPct=pct(d.todayHours,s.settings.dailyTarget);
-
+  const today=todayStr();
+  const heatmap=buildHeatmap(s.sessions);
   const filteredSessions=[...s.sessions]
     .filter(x=>s.filter==="All"||SUBJECTS.find(sub=>sub.short===s.filter)?.name===x.subject)
     .reverse();
+  const navItems=[
+    ["dashboard","Dashboard"],["log","Log session"],["history","History"],
+    ["timeline","Timeline"],["syllabus","Syllabus"],["settings","Settings"]
+  ];
 
   let html=`
   <div style="padding:16px 20px 10px">
     <div style="font-size:11px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px">2026 Philippine Bar Exam</div>
     <div style="font-size:20px;font-weight:500">Study tracker</div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;padding:0 20px 14px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;padding:0 20px 14px">
     ${[
       {label:"Days to exam",val:d.daysLeft,unit:""},
       {label:"Streak",val:s.streak.current||0,unit:"days"},
@@ -238,27 +448,27 @@ function render(){
     <div class="metric">
       <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">${m.label}</div>
       <div style="display:flex;align-items:baseline;gap:4px">
-        <span style="font-size:22px;font-weight:500;font-family:var(--font-voice);color:var(--text-primary)">${m.val}</span>
+        <span style="font-size:22px;font-weight:500;color:var(--text-primary)">${m.val}</span>
         ${m.unit?`<span style="font-size:11px;color:var(--text-muted)">${m.unit}</span>`:""}
       </div>
     </div>`).join("")}
   </div>
-  <div style="display:flex;gap:4px;padding:0 20px 14px;border-bottom:0.5px solid var(--border);flex-wrap:wrap">
-    ${[["dashboard","Dashboard"],["log","Log session"],["history","History"],["settings","Settings"]].map(([v,lbl])=>`
+  <div style="display:flex;gap:4px;padding:0 20px 14px;border-bottom:.5px solid var(--border);flex-wrap:wrap">
+    ${navItems.map(([v,lbl])=>`
     <button class="nav-btn" onclick="setState('view','${v}')"
-      style="border:0.5px solid ${s.view===v?"var(--border-accent)":"var(--border-strong)"};background:${s.view===v?"var(--bg-accent)":"transparent"};color:${s.view===v?"var(--text-accent)":"var(--text-secondary)"}">
+      style="border:.5px solid ${s.view===v?"var(--border-accent)":"var(--border-strong)"};background:${s.view===v?"var(--bg-accent)":"transparent"};color:${s.view===v?"var(--text-accent)":"var(--text-secondary)"}">
       ${lbl}
     </button>`).join("")}
   </div>
   <div style="padding:16px 20px 0">`;
 
-  // DASHBOARD
+  // ── DASHBOARD ──────────────────────────────────────────────────────────
   if(s.view==="dashboard"){
     html+=`
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px">
         <span style="font-weight:500">Today's goal</span>
-        <span style="color:var(--text-secondary)">${fmt1(d.todayHours)} / ${s.settings.dailyTarget}h${d.todayHours>=s.settings.dailyTarget?` <i class="ti ti-check" style="color:var(--text-success);vertical-align:-2px" aria-hidden="true"></i>`:""}</span>
+        <span style="color:var(--text-secondary)">${fmt1(d.todayHours)} / ${s.settings.dailyTarget}h${d.todayHours>=s.settings.dailyTarget?` <i class="ti ti-check" style="color:var(--text-success)" aria-hidden="true"></i>`:""}</span>
       </div>
       <div style="background:var(--surface-0);border-radius:6px;height:9px;overflow:hidden">
         <div style="height:100%;border-radius:6px;width:${todayPct}%;background:${d.todayHours>=s.settings.dailyTarget?"var(--fill-success)":"var(--fill-accent)"};transition:width .4s"></div>
@@ -311,67 +521,178 @@ function render(){
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
         <div style="font-weight:500;font-size:13px">Recent sessions</div>
-        ${s.sessions.length>3?`<button onclick="setState('view','history')" style="background:none;border:none;color:var(--text-accent);cursor:pointer;font-size:12px;font-weight:500;padding:0;font-family:var(--font-sans)">View all <i class="ti ti-arrow-right" aria-hidden="true"></i></button>`:""}
+        ${s.sessions.length>3?`<button onclick="setState('view','history')" style="background:none;border:none;color:var(--text-accent);cursor:pointer;font-size:12px;font-weight:500;padding:0;font-family:var(--font-sans)">View all <i class="ti ti-arrow-right"></i></button>`:""}
       </div>
       ${s.sessions.length===0
-        ?'<div style="text-align:center;padding:24px 0;color:var(--text-muted);font-size:13px">No sessions logged yet. Start tracking to see them here.</div>'
-        :[...s.sessions].reverse().slice(0,3).map(x=>sessionRowHTML(x,false)).join("")}
+        ?'<div style="text-align:center;padding:24px 0;color:var(--text-muted);font-size:13px">No sessions logged yet.</div>'
+        :[...s.sessions].reverse().slice(0,3).map(x=>sessionRowHTML(x,false,false)).join("")}
     </div>`;
   }
 
-  // LOG SESSION
+  // ── LOG SESSION ────────────────────────────────────────────────────────
   if(s.view==="log"){
+    const isEdit=!!s.editId;
     html+=`
     <div style="max-width:520px">
       <div class="card">
-        <div style="font-size:15px;font-weight:500;margin-bottom:18px">Log a study session</div>
+        <div style="font-size:15px;font-weight:500;margin-bottom:4px">${isEdit?"Edit session":"Log a study session"}</div>
+        ${isEdit?`<div style="font-size:12px;color:var(--text-muted);margin-bottom:16px">Editing — changes will overwrite the original</div>`:'<div style="font-size:12px;color:var(--text-muted);margin-bottom:16px">Tip: start the stopwatch before studying, then tap "Use time" when done.</div>'}
         <label class="field-label">Date</label>
         <input type="date" value="${s.form.date}" onchange="setForm('date',this.value)" style="margin-bottom:14px">
         <label class="field-label">Subject</label>
-        <select onchange="setForm('subject',this.value)" style="margin-bottom:14px">
+        <select id="subject-select" onchange="setForm('subject',this.value);updateTopicDatalist(this.value)" style="margin-bottom:14px">
           ${SUBJECTS.map(sub=>`<option value="${sub.name}"${s.form.subject===sub.name?" selected":""}>${sub.name}</option>`).join("")}
         </select>
-        <label class="field-label">Topic or doctrine studied</label>
-        <input type="text" value="${escHtml(s.form.topic)}" oninput="setForm('topic',this.value)" placeholder="e.g., Double jeopardy — elements and exceptions" style="margin-bottom:14px">
+        <label class="field-label">Topic or doctrine <span style="color:var(--text-muted);font-weight:400">(type or pick from official syllabus)</span></label>
+        <input type="text" id="topic-input" list="topic-datalist" value="${escHtml(s.form.topic)}" oninput="setForm('topic',this.value)" placeholder="e.g., Double jeopardy — elements and exceptions" style="margin-bottom:14px">
+        <datalist id="topic-datalist">
+          ${getTopicsForSubject(s.form.subject).map(t=>`<option value="${escHtml(t)}">`).join("")}
+        </datalist>
         <label class="field-label">Hours spent</label>
-        <input type="number" value="${s.form.hours}" oninput="setForm('hours',this.value)" placeholder="e.g., 2.5" step="0.5" min="0.5" max="16" style="margin-bottom:14px">
-        <label class="field-label">What I studied (optional)</label>
+        <input type="number" id="hours-input" value="${s.form.hours}" oninput="setForm('hours',this.value)" placeholder="e.g., 2.5" step="0.25" min="0.25" max="16" style="margin-bottom:14px">
+        <label class="field-label">What I studied <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
         <textarea oninput="setForm('studied',this.value)" rows="3" placeholder="Quick summary of what you covered…" style="margin-bottom:14px">${escHtml(s.form.studied)}</textarea>
-        <label class="field-label">What I struggled with (optional)</label>
-        <textarea oninput="setForm('struggled',this.value)" rows="3" placeholder="Note any concepts to revisit…" style="margin-bottom:14px">${escHtml(s.form.struggled)}</textarea>
-        <button class="save-btn${s.saved?" ok":""}" onclick="saveSession()">
-          ${s.saved?'<i class="ti ti-check" aria-hidden="true"></i> Session saved':"Save session"}
-        </button>
+        <label class="field-label">What I struggled with <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
+        <textarea oninput="setForm('struggled',this.value)" rows="3" placeholder="Note concepts to revisit…" style="margin-bottom:14px">${escHtml(s.form.struggled)}</textarea>
+        <div style="display:flex;gap:8px">
+          <button class="save-btn${s.saved?" ok":""}" onclick="saveSession()" style="flex:1">
+            ${s.saved?'<i class="ti ti-check"></i> Saved':isEdit?"Update session":"Save session"}
+          </button>
+          ${isEdit?`<button onclick="state.editId=null;setState('view','history')" style="padding:12px 16px;border-radius:var(--radius);border:.5px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer;font-family:var(--font-sans);font-size:14px">Cancel</button>`:""}
+        </div>
       </div>
     </div>`;
   }
 
-  // HISTORY
+  // ── HISTORY ────────────────────────────────────────────────────────────
   if(s.view==="history"){
     html+=`
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
       ${["All",...SUBJECTS.map(x=>x.short)].map(f=>`<button class="pill-btn${s.filter===f?" active":""}" onclick="setFilter('${f}')">${f}</button>`).join("")}
     </div>
     ${filteredSessions.length===0
-      ?'<div style="text-align:center;padding:40px 0;color:var(--text-muted)">No sessions for this subject yet.</div>'
-      :filteredSessions.map(x=>sessionRowHTML(x,true)).join("")}`;
+      ?'<div style="text-align:center;padding:40px 0;color:var(--text-muted)">No sessions logged yet.</div>'
+      :filteredSessions.map(x=>sessionRowHTML(x,true,true)).join("")}`;
   }
 
-  // SETTINGS
+  // ── TIMELINE ───────────────────────────────────────────────────────────
+  if(s.view==="timeline"){
+    const tl=buildTimeline(s.sessions,s.tlRange);
+    const maxHours=Math.max(...tl.map(d=>d.total),1);
+    html+=`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="font-weight:500;font-size:13px">Daily study hours</div>
+        <div style="display:flex;gap:4px">
+          ${[7,14,30].map(n=>`<button class="pill-btn${s.tlRange===n?" active":""}" onclick="setTlRange(${n})">${n}d</button>`).join("")}
+        </div>
+      </div>
+      <div style="display:flex;gap:4px;align-items:flex-end;padding-bottom:4px">
+        ${tl.map(day=>{
+          const barPct=day.total>0?Math.round((day.total/maxHours)*100):0;
+          const isToday=day.date===today;
+          return`
+          <div class="tl-bar-wrap">
+            <div style="font-size:10px;color:var(--text-muted);height:16px;display:flex;align-items:flex-end;justify-content:center">
+              ${day.total>0?fmt1(day.total):""}
+            </div>
+            <div class="tl-bar-col" style="border:${isToday?".5px solid var(--border-accent)":"none"}">
+              ${day.bySubject.filter(sub=>sub.hours>0).map(sub=>`
+              <div class="tl-bar-seg" title="${sub.name}: ${fmt1(sub.hours)}h"
+                style="height:${Math.round((sub.hours/maxHours)*80)}px;background:${sub.color};opacity:.85"></div>`).join("")}
+            </div>
+            <div class="tl-date-label" style="color:${isToday?"var(--text-accent)":"var(--text-muted)"}">
+              ${tl.length<=14?`${day.weekday}`:`${day.day}`}
+            </div>
+            ${tl.length<=14?`<div class="tl-date-label">${day.day}</div>`:""}
+          </div>`;
+        }).join("")}
+      </div>
+      <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px">
+        ${SUBJECTS.map(sub=>`
+        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary)">
+          <span style="width:9px;height:9px;border-radius:2px;background:${sub.color};display:inline-block"></span>${sub.short}
+        </div>`).join("")}
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-weight:500;font-size:13px;margin-bottom:12px">Period summary</div>
+      ${(()=>{
+        const totalInRange=tl.reduce((a,d)=>a+d.total,0);
+        const studyDays=tl.filter(d=>d.total>0).length;
+        const avg=studyDays>0?totalInRange/studyDays:0;
+        return`
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <div class="metric"><div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Total hours</div><div style="font-size:20px;font-weight:500">${fmt1(totalInRange)}</div></div>
+          <div class="metric"><div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Study days</div><div style="font-size:20px;font-weight:500">${studyDays}</div></div>
+          <div class="metric"><div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Avg/day</div><div style="font-size:20px;font-weight:500">${fmt1(avg)}</div></div>
+        </div>`;
+      })()}
+    </div>`;
+  }
+
+  // ── SYLLABUS ───────────────────────────────────────────────────────────
+  if(s.view==="syllabus"){
+    const syllabusKey=SUBJECT_SYLLABUS_MAP[s.syllabusSubject];
+    const sections=SYLLABUS[syllabusKey]||[];
+    const totalTopics=sections.reduce((a,sec)=>a+sec.topics.length,0);
+    const checkedCount=sections.reduce((a,sec)=>a+sec.topics.filter(t=>s.syllabusChecked[s.syllabusSubject+"::"+t]).length,0);
+    html+=`
+    <div class="card" style="padding-bottom:8px">
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">Official 2026 Bar Syllabus — tap topics to mark as reviewed</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">
+        ${SUBJECTS.map(sub=>`
+        <button class="pill-btn${s.syllabusSubject===sub.name?" active":""}" onclick="setSyllabusSubject('${sub.name}')">${sub.short}</button>`).join("")}
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-muted)">
+        <span>${checkedCount} / ${totalTopics} reviewed</span>
+        <div style="background:var(--surface-0);border-radius:6px;height:5px;width:120px;overflow:hidden;display:inline-block">
+          <div style="height:100%;border-radius:6px;background:var(--fill-success);width:${pct(checkedCount,totalTopics)}%"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      ${sections.map((sec,si)=>{
+        const isOpen=s.syllabusOpenSections[s.syllabusSubject+"::"+si]!==false;
+        const secChecked=sec.topics.filter(t=>s.syllabusChecked[s.syllabusSubject+"::"+t]).length;
+        return`
+        <div class="syl-section">
+          <div class="syl-section-hdr" onclick="toggleSyllabusSection('${s.syllabusSubject}',${si})">
+            <span>${sec.section} <span style="color:var(--text-muted);font-weight:400">(${secChecked}/${sec.topics.length})</span></span>
+            <i class="ti ${isOpen?"ti-chevron-up":"ti-chevron-down"}"></i>
+          </div>
+          ${isOpen?`
+          <div class="syl-topics">
+            ${sec.topics.map(t=>{
+              const ck=s.syllabusChecked[s.syllabusSubject+"::"+t];
+              return`<div class="syl-topic${ck?" checked":""}" onclick="toggleSyllabusCheck('${s.syllabusSubject}','${escHtml(t).replace(/'/g,"&#39;")}')">${escHtml(t)}</div>`;
+            }).join("")}
+          </div>`:""}
+        </div>`;
+      }).join("")}
+    </div>`;
+  }
+
+  // ── SETTINGS ───────────────────────────────────────────────────────────
   if(s.view==="settings"){
     html+=`
     <div style="max-width:460px">
       <div class="card">
         <div style="font-size:15px;font-weight:500;margin-bottom:18px">Settings</div>
-        <label class="field-label">Bar exam target date</label>
+        <label class="field-label">Bar exam date</label>
         <input type="date" value="${s.settings.examDate}" onchange="updateSetting('examDate',this.value)" style="margin-bottom:14px">
         <label class="field-label">Daily study target (hours)</label>
         <input type="number" value="${s.settings.dailyTarget}" oninput="updateSetting('dailyTarget',parseFloat(this.value)||10)" style="margin-bottom:14px">
         <label class="field-label">Total preparation hours target</label>
         <input type="number" value="${s.settings.totalTarget}" oninput="updateSetting('totalTarget',parseFloat(this.value)||1000)" style="margin-bottom:14px">
         <div style="padding:12px 14px;background:var(--surface-1);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.6">
-          Subject targets are auto-calculated from your total using official Bar weights: Remedial 25%, Civil Law 20%, Commercial 20%, Political Law 15%, Labor 10%, Criminal 10%.
+          Subject targets are auto-calculated using official Bar weights: Remedial 25%, Civil Law 20%, Commercial 20%, Political Law 15%, Labor 10%, Criminal 10%.
         </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:500;margin-bottom:12px">Data</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">${s.sessions.length} sessions logged · data stored in this browser</div>
+        <button onclick="exportData()" class="icon-btn" style="font-size:13px;padding:8px 14px"><i class="ti ti-download"></i> Export sessions as JSON</button>
       </div>
     </div>`;
   }
@@ -380,42 +701,36 @@ function render(){
   el.innerHTML=html;
 }
 
-function sessionRowHTML(x,expanded){
-  const sub=SUBJECTS.find(s=>s.name===x.subject)||{color:"var(--fill-accent)",name:x.subject};
-  return`
-  <div class="sess-row">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-      <div style="flex:1;min-width:0">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
-          <span style="width:7px;height:7px;border-radius:50%;background:${sub.color};display:inline-block;flex-shrink:0"></span>
-          <span style="font-size:11px;color:var(--text-muted);font-weight:500">${escHtml(x.subject)}</span>
-        </div>
-        <div style="font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(x.topic)}</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0">
-        <div style="font-size:17px;font-weight:500">${x.hours}h</div>
-        <div style="font-size:11px;color:var(--text-muted)">${x.date}</div>
-      </div>
-    </div>
-    ${expanded&&(x.studied||x.struggled)?`
-    <div style="margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border)">
-      ${x.studied?`<div style="margin-bottom:8px"><div style="font-size:11px;font-weight:500;color:var(--text-success);margin-bottom:3px">Studied</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.5">${escHtml(x.studied)}</div></div>`:""}
-      ${x.struggled?`<div><div style="font-size:11px;font-weight:500;color:var(--text-danger);margin-bottom:3px">Struggled with</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.5">${escHtml(x.struggled)}</div></div>`:""}
-    </div>`:""}
-  </div>`;
-}
-
-function escHtml(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+// ── Global handlers ────────────────────────────────────────────────────────
 window.setState=function(k,v){state[k]=v;render();}
 window.setForm=function(k,v){state.form={...state.form,[k]:v};}
 window.setFilter=function(v){state.filter=v;render();}
+window.setTlRange=function(v){state.tlRange=v;render();}
+window.setSyllabusSubject=function(v){state.syllabusSubject=v;render();}
 window.updateSetting=function(k,v){state.settings={...state.settings,[k]:v};saveSettings();}
+window.toggleSyllabusSection=function(subj,si){
+  const key=subj+"::"+si;
+  state.syllabusOpenSections={...state.syllabusOpenSections,[key]:state.syllabusOpenSections[key]===false?true:false};
+  render();
+}
+window.toggleSyllabusCheck=async function(subj,topic){
+  const key=subj+"::"+topic;
+  state.syllabusChecked={...state.syllabusChecked,[key]:!state.syllabusChecked[key]};
+  await window.storage.set("bar_v4_sylchecked",JSON.stringify(state.syllabusChecked));
+  render();
+}
+window.editSession=editSession;
+window.deleteSession=deleteSession;
 window.saveSession=saveSession;
+window.undoAction=undoAction;
+window.updateTopicDatalist=updateTopicDatalist;
+window.exportData=function(){
+  const blob=new Blob([JSON.stringify(state.sessions,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=`bar-sessions-${todayStr()}.json`;a.click();
+}
 
-render();
 load();
-})();
 </script>
-</div>
 </body>
 </html>
