@@ -407,9 +407,9 @@ function sessionRowHTML(x,expanded){
 
 function escHtml(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 window.setState=function(k,v){state[k]=v;render();}
-window.setForm=function(k,v){state.form={...state.form,[k]:v};render();}
+window.setForm=function(k,v){state.form={...state.form,[k]:v};}
 window.setFilter=function(v){state.filter=v;render();}
-window.updateSetting=function(k,v){state.settings={...state.settings,[k]:v};saveSettings();render();}
+window.updateSetting=function(k,v){state.settings={...state.settings,[k]:v};saveSettings();}
 window.saveSession=saveSession;
 
 render();
