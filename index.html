@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Bar Exam Study Tracker</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/tabler-icons.min.css">
+<style>
+  :root{
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-voice: var(--font-sans);
+    --radius: 8px;
+
+    --surface-0: #f7f6f0;
+    --surface-1: #ffffff;
+    --surface-2: #ffffff;
+    --border: #e5e3da;
+    --border-strong: #d8d5c9;
+    --border-accent: #2a78d6;
+    --bg-accent: #e6f1fb;
+    --text-primary: #1c1b17;
+    --text-secondary: #55524a;
+    --text-muted: #928e80;
+    --text-accent: #1a5aa8;
+    --text-success: #1a8f5e;
+    --text-danger: #c23d3c;
+    --text-warning: #a8620f;
+    --fill-accent: #2a78d6;
+    --fill-success: #1baf7a;
+    --on-accent: #ffffff;
+    --on-success: #ffffff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface-0: #1a1a17;
+      --surface-1: #232320;
+      --surface-2: #232320;
+      --border: #33322d;
+      --border-strong: #403f38;
+      --border-accent: #378add;
+      --bg-accent: #0c2a44;
+      --text-primary: #f1f0e9;
+      --text-secondary: #c7c4b8;
+      --text-muted: #83806f;
+      --text-accent: #6cb0ef;
+      --text-success: #4fd39a;
+      --text-danger: #f0837f;
+      --text-warning: #f0aa5c;
+      --fill-accent: #378add;
+      --fill-success: #1baf7a;
+      --on-accent: #ffffff;
+      --on-success: #ffffff;
+    }
+  }
+  html, body{
+    margin:0;
+    padding:0;
+    background:var(--surface-0);
+    font-family:var(--font-sans);
+  }
+  #app-wrap{
+    max-width:720px;
+    margin:0 auto;
+    min-height:100vh;
+    background:var(--surface-0);
+  }
+</style>
+</head>
+<body>
+<div id="app-wrap">
+
+<style>
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.nav-btn{padding:6px 14px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:500;transition:background .15s}
+.sess-row{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px;border:0.5px solid var(--border);margin-bottom:10px}
+.field-label{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:6px}
+.card{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.metric{background:var(--surface-1);border-radius:var(--radius);padding:12px 14px}
+.pill-btn{padding:4px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:500;border:0.5px solid var(--border-strong);background:transparent;color:var(--text-secondary)}
+.pill-btn.active{border-color:var(--border-accent);background:var(--bg-accent);color:var(--text-accent)}
+input,select,textarea{font-family:var(--font-sans);font-size:14px;color:var(--text-primary);background:var(--surface-1);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:9px 11px;width:100%;box-sizing:border-box;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--border-accent);box-shadow:0 0 0 2px var(--bg-accent)}
+textarea{resize:vertical}
+.save-btn{width:100%;margin-top:6px;padding:12px;background:var(--fill-accent);color:var(--on-accent);border:none;border-radius:var(--radius);font-weight:500;font-size:14px;cursor:pointer;font-family:var(--font-sans)}
+.save-btn.ok{background:var(--fill-success);color:var(--on-success)}
+</style>
+
+<h2 class="sr-only">2026 Philippine Bar exam study tracker — log sessions, track streaks, and monitor progress by subject</h2>
+
+<div id="root" style="font-family:var(--font-sans);color:var(--text-primary);padding-bottom:28px"></div>
+
+<script>
+
+window.storage = {
+  async get(key){
+    const v = localStorage.getItem(key);
+    return v === null ? null : { value: v };
+  },
+  async set(key, value){
+    localStorage.setItem(key, value);
+    return { value };
+  },
+  async delete(key){
+    localStorage.removeItem(key);
+  }
+};
+
+(function(){
+const SUBJECTS=[
+  {name:"Political Law & PIL",short:"Pol. Law",color:"#2a78d6",weight:.15},
+  {name:"Commercial Law & Taxation",short:"Commercial",color:"#eda100",weight:.20},
+  {name:"Civil Law & Land Titles",short:"Civil Law",color:"#1baf7a",weight:.20},
+  {name:"Labor Law & Social Legislation",short:"Labor Law",color:"#e87ba4",weight:.10},
+  {name:"Criminal Law",short:"Criminal",color:"#e34948",weight:.10},
+  {name:"Remedial Law & Ethics",short:"Remedial",color:"#4a3aa7",weight:.25},
+];
+const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+let state={
+  view:"dashboard",
+  sessions:[],
+  settings:{examDate:"2026-11-08",dailyTarget:10,totalTarget:1000},
+  streak:{current:0,longest:0,lastDate:null},
+  loading:true,
+  form:{date:todayStr(),subject:"Civil Law & Land Titles",topic:"",hours:"",studied:"",struggled:""},
+  saved:false,
+  filter:"All",
+};
+
+function todayStr(){return new Date().toISOString().split("T")[0];}
+function fmt1(n){return parseFloat(n||0).toFixed(1);}
+function isDark(){return window.matchMedia?.("(prefers-color-scheme:dark)").matches;}
+
+function heatColor(hrs,future){
+  const dark=isDark();
+  if(future)return dark?"#2c2c2a":"#e1e0d9";
+  if(hrs===0)return dark?"#2c2c2a":"#f1f0e9";
+  if(hrs<3)return dark?"#0c447c":"#e6f1fb";
+  if(hrs<6)return dark?"#185fa5":"#b5d4f4";
+  if(hrs<9)return dark?"#378add":"#378add";
+  return"#ba7517";
+}
+
+function buildHeatmap(sessions){
+  const now=new Date();
+  const start=new Date(now);
+  start.setDate(now.getDate()-now.getDay()-77);
+  const weeks=[];const cur=new Date(start);
+  for(let w=0;w<12;w++){
+    const week=[];
+    for(let d=0;d<7;d++){
+      const ds=cur.toISOString().split("T")[0];
+      const hrs=sessions.filter(s=>s.date===ds).reduce((a,s)=>a+(s.hours||0),0);
+      week.push({date:ds,hours:hrs,month:cur.getMonth(),day:cur.getDate(),future:cur>now});
+      cur.setDate(cur.getDate()+1);
+    }
+    weeks.push(week);
+  }
+  return weeks;
+}
+
+async function load(){
+  try{const r=await window.storage.get("bar_v4_sessions");if(r)state.sessions=JSON.parse(r.value);}catch{}
+  try{const r=await window.storage.get("bar_v4_settings");if(r)state.settings={...state.settings,...JSON.parse(r.value)};}catch{}
+  try{const r=await window.storage.get("bar_v4_streak");if(r)state.streak=JSON.parse(r.value);}catch{}
+  state.loading=false;
+  render();
+}
+
+async function saveSession(){
+  const h=parseFloat(state.form.hours);
+  if(!state.form.topic.trim()||!h||h<=0)return;
+  const session={id:Date.now().toString(),...state.form,hours:h};
+  state.sessions=[...state.sessions,session];
+  const today=todayStr();
+  const yest=new Date();yest.setDate(yest.getDate()-1);
+  const yd=yest.toISOString().split("T")[0];
+  const sk=state.streak;
+  if(sk.lastDate!==today){
+    sk.current=sk.lastDate===yd?(sk.current||0)+1:1;
+    sk.longest=Math.max(sk.longest||0,sk.current);
+    sk.lastDate=today;
+    try{await window.storage.set("bar_v4_streak",JSON.stringify(sk));}catch{}
+  }
+  try{await window.storage.set("bar_v4_sessions",JSON.stringify(state.sessions));}catch{}
+  state.saved=true;state.form={...state.form,topic:"",hours:"",studied:"",struggled:""};
+  render();
+  setTimeout(()=>{state.saved=false;state.view="dashboard";render();},1500);
+}
+
+async function saveSettings(){
+  try{await window.storage.set("bar_v4_settings",JSON.stringify(state.settings));}catch{}
+}
+
+function derived(){
+  const s=state;
+  const today=todayStr();
+  const daysLeft=Math.max(0,Math.ceil((new Date(s.settings.examDate)-new Date())/86400000));
+  const todayHours=s.sessions.filter(x=>x.date===today).reduce((a,x)=>a+(x.hours||0),0);
+  const totalHours=s.sessions.reduce((a,x)=>a+(x.hours||0),0);
+  const uniqueDays=new Set(s.sessions.map(x=>x.date)).size;
+  const avgHours=uniqueDays>0?totalHours/uniqueDays:0;
+  const subjectStats=SUBJECTS.map(sub=>({
+    ...sub,
+    hours:s.sessions.filter(x=>x.subject===sub.name).reduce((a,x)=>a+(x.hours||0),0),
+    target:Math.round(sub.weight*(s.settings.totalTarget||1000)),
+  }));
+  return{daysLeft,todayHours,totalHours,uniqueDays,avgHours,subjectStats};
+}
+
+function render(){
+  const el=document.getElementById("root");
+  if(!el)return;
+  if(state.loading){el.innerHTML='<div style="padding:40px;text-align:center;color:var(--text-muted)">Loading your study data…</div>';return;}
+  const d=derived();
+  const today=todayStr();
+  const heatmap=buildHeatmap(state.sessions);
+  const s=state;
+  const pct=(a,b)=>b>0?Math.min(100,Math.round((a/b)*100)):0;
+  const todayPct=pct(d.todayHours,s.settings.dailyTarget);
+
+  const filteredSessions=[...s.sessions]
+    .filter(x=>s.filter==="All"||SUBJECTS.find(sub=>sub.short===s.filter)?.name===x.subject)
+    .reverse();
+
+  let html=`
+  <div style="padding:16px 20px 10px">
+    <div style="font-size:11px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px">2026 Philippine Bar Exam</div>
+    <div style="font-size:20px;font-weight:500">Study tracker</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;padding:0 20px 14px">
+    ${[
+      {label:"Days to exam",val:d.daysLeft,unit:""},
+      {label:"Streak",val:s.streak.current||0,unit:"days"},
+      {label:"Total hours",val:fmt1(d.totalHours),unit:"hrs"},
+      {label:"Today",val:fmt1(d.todayHours),unit:`/ ${s.settings.dailyTarget}h`},
+    ].map(m=>`
+    <div class="metric">
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">${m.label}</div>
+      <div style="display:flex;align-items:baseline;gap:4px">
+        <span style="font-size:22px;font-weight:500;font-family:var(--font-voice);color:var(--text-primary)">${m.val}</span>
+        ${m.unit?`<span style="font-size:11px;color:var(--text-muted)">${m.unit}</span>`:""}
+      </div>
+    </div>`).join("")}
+  </div>
+  <div style="display:flex;gap:4px;padding:0 20px 14px;border-bottom:0.5px solid var(--border);flex-wrap:wrap">
+    ${[["dashboard","Dashboard"],["log","Log session"],["history","History"],["settings","Settings"]].map(([v,lbl])=>`
+    <button class="nav-btn" onclick="setState('view','${v}')"
+      style="border:0.5px solid ${s.view===v?"var(--border-accent)":"var(--border-strong)"};background:${s.view===v?"var(--bg-accent)":"transparent"};color:${s.view===v?"var(--text-accent)":"var(--text-secondary)"}">
+      ${lbl}
+    </button>`).join("")}
+  </div>
+  <div style="padding:16px 20px 0">`;
+
+  // DASHBOARD
+  if(s.view==="dashboard"){
+    html+=`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px">
+        <span style="font-weight:500">Today's goal</span>
+        <span style="color:var(--text-secondary)">${fmt1(d.todayHours)} / ${s.settings.dailyTarget}h${d.todayHours>=s.settings.dailyTarget?` <i class="ti ti-check" style="color:var(--text-success);vertical-align:-2px" aria-hidden="true"></i>`:""}</span>
+      </div>
+      <div style="background:var(--surface-0);border-radius:6px;height:9px;overflow:hidden">
+        <div style="height:100%;border-radius:6px;width:${todayPct}%;background:${d.todayHours>=s.settings.dailyTarget?"var(--fill-success)":"var(--fill-accent)"};transition:width .4s"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-weight:500;font-size:13px;margin-bottom:12px">Activity — last 12 weeks</div>
+      <div style="display:flex;gap:3px">
+        <div style="display:flex;flex-direction:column;gap:3px;margin-top:16px;margin-right:4px;flex-shrink:0">
+          ${["","M","","W","","F",""].map(d=>`<div style="height:13px;width:12px;font-size:11px;color:var(--text-muted);line-height:13px">${d}</div>`).join("")}
+        </div>
+        <div style="flex:1;overflow-x:auto">
+          <div style="display:flex;gap:3px;height:13px;margin-bottom:3px">
+            ${heatmap.map((week,wi)=>`<div style="width:13px;font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:visible;flex-shrink:0">${wi===0||week[0].day<=7?MONTHS[week[0].month]:""}</div>`).join("")}
+          </div>
+          <div style="display:flex;gap:3px">
+            ${heatmap.map(week=>`
+            <div style="display:flex;flex-direction:column;gap:3px;flex-shrink:0">
+              ${week.map(day=>`<div title="${day.date}: ${fmt1(day.hours)}h" style="width:13px;height:13px;border-radius:2px;background:${heatColor(day.hours,day.future)}"></div>`).join("")}
+            </div>`).join("")}
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;margin-top:10px;font-size:11px;color:var(--text-muted)">
+        <span>Less</span>
+        ${[0,2,5,8].map(h=>`<div style="width:11px;height:11px;border-radius:2px;background:${heatColor(h,false)}"></div>`).join("")}
+        <span>More</span>
+        <div style="width:11px;height:11px;border-radius:2px;background:#ba7517;margin-left:6px"></div>
+        <span style="color:var(--text-warning)">Target reached</span>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-weight:500;font-size:13px;margin-bottom:14px">Hours by subject</div>
+      ${d.subjectStats.map(sub=>`
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="width:8px;height:8px;border-radius:50%;background:${sub.color};display:inline-block;flex-shrink:0"></span>
+            <span style="font-weight:500">${sub.short}</span>
+          </div>
+          <span style="color:var(--text-muted)">${fmt1(sub.hours)} / ${sub.target}h
+            <span style="margin-left:6px;color:${sub.hours>=sub.target?"var(--text-success)":"var(--text-secondary)"}">(${pct(sub.hours,sub.target)}%)</span>
+          </span>
+        </div>
+        <div style="background:var(--surface-0);border-radius:4px;height:6px;overflow:hidden">
+          <div style="height:100%;border-radius:4px;background:${sub.color};width:${pct(sub.hours,sub.target)}%;transition:width .4s"></div>
+        </div>
+      </div>`).join("")}
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="font-weight:500;font-size:13px">Recent sessions</div>
+        ${s.sessions.length>3?`<button onclick="setState('view','history')" style="background:none;border:none;color:var(--text-accent);cursor:pointer;font-size:12px;font-weight:500;padding:0;font-family:var(--font-sans)">View all <i class="ti ti-arrow-right" aria-hidden="true"></i></button>`:""}
+      </div>
+      ${s.sessions.length===0
+        ?'<div style="text-align:center;padding:24px 0;color:var(--text-muted);font-size:13px">No sessions logged yet. Start tracking to see them here.</div>'
+        :[...s.sessions].reverse().slice(0,3).map(x=>sessionRowHTML(x,false)).join("")}
+    </div>`;
+  }
+
+  // LOG SESSION
+  if(s.view==="log"){
+    html+=`
+    <div style="max-width:520px">
+      <div class="card">
+        <div style="font-size:15px;font-weight:500;margin-bottom:18px">Log a study session</div>
+        <label class="field-label">Date</label>
+        <input type="date" value="${s.form.date}" onchange="setForm('date',this.value)" style="margin-bottom:14px">
+        <label class="field-label">Subject</label>
+        <select onchange="setForm('subject',this.value)" style="margin-bottom:14px">
+          ${SUBJECTS.map(sub=>`<option value="${sub.name}"${s.form.subject===sub.name?" selected":""}>${sub.name}</option>`).join("")}
+        </select>
+        <label class="field-label">Topic or doctrine studied</label>
+        <input type="text" value="${escHtml(s.form.topic)}" oninput="setForm('topic',this.value)" placeholder="e.g., Double jeopardy — elements and exceptions" style="margin-bottom:14px">
+        <label class="field-label">Hours spent</label>
+        <input type="number" value="${s.form.hours}" oninput="setForm('hours',this.value)" placeholder="e.g., 2.5" step="0.5" min="0.5" max="16" style="margin-bottom:14px">
+        <label class="field-label">What I studied (optional)</label>
+        <textarea oninput="setForm('studied',this.value)" rows="3" placeholder="Quick summary of what you covered…" style="margin-bottom:14px">${escHtml(s.form.studied)}</textarea>
+        <label class="field-label">What I struggled with (optional)</label>
+        <textarea oninput="setForm('struggled',this.value)" rows="3" placeholder="Note any concepts to revisit…" style="margin-bottom:14px">${escHtml(s.form.struggled)}</textarea>
+        <button class="save-btn${s.saved?" ok":""}" onclick="saveSession()">
+          ${s.saved?'<i class="ti ti-check" aria-hidden="true"></i> Session saved':"Save session"}
+        </button>
+      </div>
+    </div>`;
+  }
+
+  // HISTORY
+  if(s.view==="history"){
+    html+=`
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+      ${["All",...SUBJECTS.map(x=>x.short)].map(f=>`<button class="pill-btn${s.filter===f?" active":""}" onclick="setFilter('${f}')">${f}</button>`).join("")}
+    </div>
+    ${filteredSessions.length===0
+      ?'<div style="text-align:center;padding:40px 0;color:var(--text-muted)">No sessions for this subject yet.</div>'
+      :filteredSessions.map(x=>sessionRowHTML(x,true)).join("")}`;
+  }
+
+  // SETTINGS
+  if(s.view==="settings"){
+    html+=`
+    <div style="max-width:460px">
+      <div class="card">
+        <div style="font-size:15px;font-weight:500;margin-bottom:18px">Settings</div>
+        <label class="field-label">Bar exam target date</label>
+        <input type="date" value="${s.settings.examDate}" onchange="updateSetting('examDate',this.value)" style="margin-bottom:14px">
+        <label class="field-label">Daily study target (hours)</label>
+        <input type="number" value="${s.settings.dailyTarget}" oninput="updateSetting('dailyTarget',parseFloat(this.value)||10)" style="margin-bottom:14px">
+        <label class="field-label">Total preparation hours target</label>
+        <input type="number" value="${s.settings.totalTarget}" oninput="updateSetting('totalTarget',parseFloat(this.value)||1000)" style="margin-bottom:14px">
+        <div style="padding:12px 14px;background:var(--surface-1);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.6">
+          Subject targets are auto-calculated from your total using official Bar weights: Remedial 25%, Civil Law 20%, Commercial 20%, Political Law 15%, Labor 10%, Criminal 10%.
+        </div>
+      </div>
+    </div>`;
+  }
+
+  html+="</div></div>";
+  el.innerHTML=html;
+}
+
+function sessionRowHTML(x,expanded){
+  const sub=SUBJECTS.find(s=>s.name===x.subject)||{color:"var(--fill-accent)",name:x.subject};
+  return`
+  <div class="sess-row">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+          <span style="width:7px;height:7px;border-radius:50%;background:${sub.color};display:inline-block;flex-shrink:0"></span>
+          <span style="font-size:11px;color:var(--text-muted);font-weight:500">${escHtml(x.subject)}</span>
+        </div>
+        <div style="font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(x.topic)}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:17px;font-weight:500">${x.hours}h</div>
+        <div style="font-size:11px;color:var(--text-muted)">${x.date}</div>
+      </div>
+    </div>
+    ${expanded&&(x.studied||x.struggled)?`
+    <div style="margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border)">
+      ${x.studied?`<div style="margin-bottom:8px"><div style="font-size:11px;font-weight:500;color:var(--text-success);margin-bottom:3px">Studied</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.5">${escHtml(x.studied)}</div></div>`:""}
+      ${x.struggled?`<div><div style="font-size:11px;font-weight:500;color:var(--text-danger);margin-bottom:3px">Struggled with</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.5">${escHtml(x.struggled)}</div></div>`:""}
+    </div>`:""}
+  </div>`;
+}
+
+function escHtml(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+window.setState=function(k,v){state[k]=v;render();}
+window.setForm=function(k,v){state.form={...state.form,[k]:v};render();}
+window.setFilter=function(v){state.filter=v;render();}
+window.updateSetting=function(k,v){state.settings={...state.settings,[k]:v};saveSettings();render();}
+window.saveSession=saveSession;
+
+render();
+load();
+})();
+</script>
+</div>
+</body>
+</html>
